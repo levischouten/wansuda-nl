@@ -1,6 +1,7 @@
 import { createReader } from "@keystatic/core/reader";
 import keystaticConfig from "@/keystatic.config";
 import { DocumentRenderer } from "@keystatic/core/renderer";
+import { notFound } from "next/navigation";
 
 export default async function Page({ params }: { params: { slug: string } }) {
   const reader = createReader(process.cwd(), keystaticConfig);
@@ -8,12 +9,8 @@ export default async function Page({ params }: { params: { slug: string } }) {
   const service = await reader.collections.services.read(params.slug);
 
   if (!service) {
-    return <div>Not found</div>;
+    return notFound();
   }
-
-  const content = await service.content();
-
-  console.log(content);
 
   return (
     <main>

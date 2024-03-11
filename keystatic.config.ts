@@ -14,8 +14,68 @@ export default config({
       label: "Homepage",
       path: "/content/homepage",
       schema: {
-        title: fields.text({ label: "Title" }),
-        description: fields.text({ label: "Description" }),
+        heroText: fields.document({
+          label: "Hero Text",
+          formatting: {
+            headingLevels: [1],
+            inlineMarks: true,
+          },
+        }),
+        heroImage: fields.image({
+          label: "Hero Image",
+          directory: "public/site/images",
+          publicPath: "/site/images",
+        }),
+        featureText: fields.document({
+          label: "Service Text",
+          formatting: {
+            headingLevels: [2, 3],
+            inlineMarks: true,
+          },
+        }),
+        features: fields.array(
+          fields.object({
+            title: fields.text({ label: "Title" }),
+            description: fields.text({ label: "Description", multiline: true }),
+            href: fields.text({ label: "Link" }),
+            icon: fields.select({
+              label: "Icon",
+              options: [
+                {
+                  label: "Heart",
+                  value: "heart",
+                },
+                {
+                  label: "Graduation Cap",
+                  value: "graduation-cap",
+                },
+              ],
+              defaultValue: "heart",
+            }),
+          })
+        ),
+        contentText: fields.document({
+          label: "Content Text",
+          formatting: {
+            headingLevels: [2, 3],
+            inlineMarks: true,
+            listTypes: true,
+          },
+        }),
+        contentImage: fields.image({
+          label: "Content Image",
+          directory: "public/site/images",
+          publicPath: "/site/images",
+        }),
+        contentImageText: fields.document({
+          label: "Content Image Text",
+          formatting: {
+            headingLevels: [4],
+            inlineMarks: true,
+          },
+          dividers: true,
+          links: true,
+        }),
       },
     }),
   },

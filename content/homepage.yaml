@@ -1,0 +1,15 @@
+heroImage: /site/images/heroImage.JPG
+features:
+  - title: Massage Meesterschap
+    description: >-
+      Leer van professionals met onze praktijkgerichte cursussen. Geschikt voor
+      elk niveau, om je technieken te verbeteren en meesterschap te bereiken.
+    href: /courses
+    icon: graduation-cap
+  - title: Therapeutische Massages
+    description: >-
+      Verminder stress en spierspanning met onze op maat gemaakte massages.
+      Ervaar diepe ontspanning en bevorder je welzijn
+    href: /services
+    icon: heart
+contentImage: /site/images/contentImage.jpg

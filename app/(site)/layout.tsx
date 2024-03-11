@@ -1,16 +1,7 @@
-import "../globals.css";
-import { Inter as FontSans } from "next/font/google";
-
-import { cn } from "@/lib/utils";
+import { Footer } from "@/components/shared/footer";
 import { Header } from "@/components/shared/header";
-
-import { createReader } from "@keystatic/core/reader";
 import keystaticConfig from "@/keystatic.config";
-
-const fontSans = FontSans({
-  subsets: ["latin"],
-  variable: "--font-sans",
-});
+import { createReader } from "@keystatic/core/reader";
 
 export default async function RootLayout({
   children,
@@ -25,28 +16,21 @@ export default async function RootLayout({
   const courses = await reader.collections.courses.all();
 
   return (
-    <html lang="en" suppressHydrationWarning>
-      <head />
-      <body
-        className={cn(
-          "min-h-screen bg-background font-sans antialiased",
-          fontSans.variable
-        )}
-      >
-        <Header
-          courses={courses.map((course) => ({
-            title: course.entry.title,
-            description: course.entry.description,
-            slug: course.slug,
-          }))}
-          services={services.map((service) => ({
-            title: service.entry.title,
-            description: service.entry.description,
-            slug: service.slug,
-          }))}
-        />
-        {children}
-      </body>
-    </html>
+    <>
+      <Header
+        courses={courses.map((course) => ({
+          title: course.entry.title,
+          description: course.entry.description,
+          slug: course.slug,
+        }))}
+        services={services.map((service) => ({
+          title: service.entry.title,
+          description: service.entry.description,
+          slug: service.slug,
+        }))}
+      />
+      {children}
+      <Footer />
+    </>
   );
 }
