@@ -4,6 +4,9 @@ export default config({
   storage: {
     kind: "local",
   },
+  cloud: {
+    project: "levi-schouten/wansuda-nl",
+  },
   singletons: {
     settings: singleton({
       label: "Settings",
