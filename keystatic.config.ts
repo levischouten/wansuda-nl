@@ -2,10 +2,20 @@ import { config, fields, collection, singleton } from "@keystatic/core";
 
 export default config({
   storage: {
-    kind: "cloud",
+    kind: process.env.NODE_ENV === "development" ? "local" : "cloud",
   },
   cloud: {
     project: "levi-schouten/wansuda-nl",
+  },
+  ui: {
+    brand: {
+      name: "Wansuda",
+    },
+    navigation: {
+      Admin: ["settings"],
+      Pages: ["homepage", "servicespage", "terms-and-conditions-page"],
+      Collections: ["courses", "services"],
+    },
   },
   singletons: {
     settings: singleton({
@@ -13,11 +23,41 @@ export default config({
       path: "/content/settings",
       schema: {},
     }),
+    servicespage: singleton({
+      label: "Servicespage",
+      path: "/content/servicespage",
+      schema: {
+        headerText: fields.document({
+          description: "The text to display in the header.",
+          label: "Header Text",
+          formatting: {
+            headingLevels: [1],
+            inlineMarks: true,
+          },
+        }),
+      },
+    }),
+    "terms-and-conditions-page": singleton({
+      label: "Terms and Conditions page",
+      path: "/content/terms-and-conditions",
+      schema: {
+        content: fields.document({
+          label: "Content",
+          description:
+            "The content to display on the terms and conditions page.",
+          formatting: {
+            headingLevels: [1],
+            inlineMarks: true,
+          },
+        }),
+      },
+    }),
     homepage: singleton({
       label: "Homepage",
       path: "/content/homepage",
       schema: {
         heroText: fields.document({
+          description: "The text to display as the 'hero' text.",
           label: "Hero Text",
           formatting: {
             headingLevels: [1],
@@ -25,12 +65,14 @@ export default config({
           },
         }),
         heroImage: fields.image({
+          description: "The image to display as the 'hero' image.",
           label: "Hero Image",
           directory: "public/site/images",
           publicPath: "/site/images",
         }),
         featureText: fields.document({
-          label: "Service Text",
+          label: "Feature Text",
+          description: "The text to display as the 'feature' text.",
           formatting: {
             headingLevels: [2, 3],
             inlineMarks: true,
@@ -55,10 +97,14 @@ export default config({
               ],
               defaultValue: "heart",
             }),
-          })
+          }),
+          {
+            description: "The features to display on the homepage.",
+          }
         ),
         contentText: fields.document({
           label: "Content Text",
+          description: "The text to display as the 'content' text.",
           formatting: {
             headingLevels: [2, 3],
             inlineMarks: true,
@@ -66,12 +112,15 @@ export default config({
           },
         }),
         contentImage: fields.image({
+          description:
+            "The image to display as the 'content' image. This will have a gradient overlay with the content image text.",
           label: "Content Image",
           directory: "public/site/images",
           publicPath: "/site/images",
         }),
         contentImageText: fields.document({
           label: "Content Image Text",
+          description: "The text to display over the 'content' image.",
           formatting: {
             headingLevels: [4],
             inlineMarks: true,
@@ -96,21 +145,18 @@ export default config({
           description: "A short description of this service",
         }),
         content: fields.document({
+          description: "The content to display for this service",
           label: "Content",
-          formatting: true,
-          dividers: true,
-          links: true,
-          images: {
-            directory: "public/site/images",
-            publicPath: "/site/images",
-            schema: {
-              title: fields.text({
-                label: "Caption",
-                description:
-                  "The text to display under the image in a caption.",
-              }),
-            },
+          formatting: {
+            headingLevels: [2],
+            inlineMarks: true,
           },
+        }),
+        image: fields.image({
+          label: "Image",
+          directory: "public/site/images",
+          publicPath: "/site/images",
+          description: "The image to display for this service",
         }),
       },
     }),

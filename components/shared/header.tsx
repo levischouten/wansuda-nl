@@ -61,14 +61,14 @@ export function Header(props: HeaderProps) {
             </Link>
           </NavigationMenuItem>
           <NavigationMenuItem>
-            <NavigationMenuTrigger>Services</NavigationMenuTrigger>
+            <NavigationMenuTrigger>Behandelingen</NavigationMenuTrigger>
             <NavigationMenuContent>
               <ul className="grid gap-3 p-6 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
                 {props.services.map((service) => (
                   <ListItem
                     key={service.slug}
                     title={service.title}
-                    href={`/services/${service.slug}`}
+                    href={`/behandelingen#${service.slug}`}
                   >
                     {service.description}
                   </ListItem>
@@ -93,9 +93,9 @@ export function Header(props: HeaderProps) {
             </NavigationMenuContent>
           </NavigationMenuItem>
           <NavigationMenuItem>
-            <Link href="/fotos" legacyBehavior passHref>
+            <Link href="/algemene-voorwaarden" legacyBehavior passHref>
               <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                Foto&apos;s
+                Algemene Voorwaarden
               </NavigationMenuLink>
             </Link>
           </NavigationMenuItem>
@@ -134,7 +134,7 @@ export function Header(props: HeaderProps) {
                     {props.services.map((service) => (
                       <Link
                         key={service.slug}
-                        href={`/services/${service.slug}`}
+                        href={`/behandelingen#${service.slug}`}
                         legacyBehavior
                         passHref
                       >
@@ -173,9 +173,9 @@ export function Header(props: HeaderProps) {
               </Collapsible>
             </li>
             <li>
-              <Link href="/" legacyBehavior passHref>
+              <Link href="/algemene-voorwaarden" legacyBehavior passHref>
                 <a className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground">
-                  Foto&apos;s
+                  Algemene Voorwaarden
                 </a>
               </Link>
             </li>

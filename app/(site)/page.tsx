@@ -25,10 +25,10 @@ export default async function Home() {
           </div>
           <div className="space-x-2">
             <Button asChild>
-              <Link href="/services">Bekijk behandelingen</Link>
+              <Link href="/behandelingen">Bekijk behandelingen</Link>
             </Button>
             <Button asChild variant="ghost">
-              <Link href="/services">
+              <Link href="/behandelingen">
                 Lees meer <ArrowRightIcon className="w-4 h-4 ml-2" />
               </Link>
             </Button>
@@ -95,7 +95,7 @@ export default async function Home() {
             <DocumentRenderer document={await homepage?.contentText()} />
           </div>
           <Link
-            href="/services"
+            href="/behandelingen"
             className="flex gap-2 items-center text-primary font-semibold"
           >
             Lees meer over onze diensten

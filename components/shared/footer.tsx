@@ -11,13 +11,13 @@ export function Footer() {
           <Link href="/">Welkom</Link>
         </li>
         <li>
-          <Link href="/services">Services</Link>
+          <Link href="/behandelingen">Behandelingen</Link>
         </li>
         <li>
           <Link href="/courses">Courses</Link>
         </li>
         <li>
-          <Link href="/fotos">Foto&apos;s</Link>
+          <Link href="/algemene-voorwaarden">Algemene Voorwaarden</Link>
         </li>
       </ul>
       <div className="flex gap-8 text-muted-foreground">
