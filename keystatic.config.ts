@@ -13,7 +13,12 @@ export default config({
     },
     navigation: {
       Admin: ["settings"],
-      Pages: ["homepage", "servicespage", "terms-and-conditions-page"],
+      Pages: [
+        "homepage",
+        "servicespage",
+        "coursespage",
+        "terms-and-conditions-page",
+      ],
       Collections: ["courses", "services"],
     },
   },
@@ -26,6 +31,20 @@ export default config({
     servicespage: singleton({
       label: "Servicespage",
       path: "/content/servicespage",
+      schema: {
+        headerText: fields.document({
+          description: "The text to display in the header.",
+          label: "Header Text",
+          formatting: {
+            headingLevels: [1],
+            inlineMarks: true,
+          },
+        }),
+      },
+    }),
+    coursespage: singleton({
+      label: "Coursespage",
+      path: "/content/coursespage",
       schema: {
         headerText: fields.document({
           description: "The text to display in the header.",
@@ -173,21 +192,18 @@ export default config({
           description: "A short description of this course",
         }),
         content: fields.document({
+          description: "The content to display for this course",
           label: "Content",
-          formatting: true,
-          dividers: true,
-          links: true,
-          images: {
-            directory: "public/site/images",
-            publicPath: "/site/images",
-            schema: {
-              title: fields.text({
-                label: "Caption",
-                description:
-                  "The text to display under the image in a caption.",
-              }),
-            },
+          formatting: {
+            headingLevels: [2],
+            inlineMarks: true,
           },
+        }),
+        image: fields.image({
+          label: "Image",
+          directory: "public/site/images",
+          publicPath: "/site/images",
+          description: "The image to display for this course",
         }),
       },
     }),

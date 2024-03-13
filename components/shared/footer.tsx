@@ -5,8 +5,8 @@ export function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="flex flex-col items-center text-sm pb-20 pt-48 gap-8">
-      <ul className="flex gap-10">
+    <footer className="flex flex-col items-center text-sm pb-20 pt-48 gap-8 max-w-screen-lg mx-auto px-8">
+      <ul className="flex gap-10 flex-col md:flex-row justify-start md:justify-center w-full">
         <li>
           <Link href="/">Welkom</Link>
         </li>
@@ -14,7 +14,7 @@ export function Footer() {
           <Link href="/behandelingen">Behandelingen</Link>
         </li>
         <li>
-          <Link href="/courses">Courses</Link>
+          <Link href="/cursussen">Cursussen</Link>
         </li>
         <li>
           <Link href="/algemene-voorwaarden">Algemene Voorwaarden</Link>

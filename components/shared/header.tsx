@@ -63,7 +63,7 @@ export function Header(props: HeaderProps) {
           <NavigationMenuItem>
             <NavigationMenuTrigger>Behandelingen</NavigationMenuTrigger>
             <NavigationMenuContent>
-              <ul className="grid gap-3 p-6 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
+              <ul className="grid gap-3 p-6 md:w-[400px] lg:w-[500px] grid-cols-1 md:grid-cols-2">
                 {props.services.map((service) => (
                   <ListItem
                     key={service.slug}
@@ -77,14 +77,14 @@ export function Header(props: HeaderProps) {
             </NavigationMenuContent>
           </NavigationMenuItem>
           <NavigationMenuItem>
-            <NavigationMenuTrigger>Courses</NavigationMenuTrigger>
+            <NavigationMenuTrigger>Cursussen</NavigationMenuTrigger>
             <NavigationMenuContent>
-              <ul className="grid gap-3 p-6 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
+              <ul className="grid gap-3 p-6 md:w-[400px] lg:w-[500px] grid-cols-1 md:grid-cols-2">
                 {props.courses.map((course) => (
                   <ListItem
                     key={course.slug}
                     title={course.title}
-                    href={`/courses/${course.slug}`}
+                    href={`/cursussen#${course.slug}`}
                   >
                     {course.description}
                   </ListItem>
@@ -125,7 +125,7 @@ export function Header(props: HeaderProps) {
             <li>
               <Collapsible className="group">
                 <CollapsibleTrigger className="w-full text-start flex justify-between items-center select-none rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground">
-                  Services
+                  Behandelingen
                   <ChevronUpIcon className="w-4 h-4 group-data-[state=closed]:hidden" />
                   <ChevronDownIcon className="w-4 h-4 group-data-[state=open]:hidden" />
                 </CollapsibleTrigger>
@@ -150,7 +150,7 @@ export function Header(props: HeaderProps) {
             <li>
               <Collapsible className="group">
                 <CollapsibleTrigger className="w-full text-start flex justify-between items-center select-none rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground">
-                  Courses
+                  Cursussen
                   <ChevronUpIcon className="w-4 h-4 group-data-[state=closed]:hidden" />
                   <ChevronDownIcon className="w-4 h-4 group-data-[state=open]:hidden" />
                 </CollapsibleTrigger>
@@ -159,7 +159,7 @@ export function Header(props: HeaderProps) {
                     {props.courses.map((course) => (
                       <Link
                         key={course.slug}
-                        href={`/courses/${course.slug}`}
+                        href={`/cursussen#${course.slug}`}
                         legacyBehavior
                         passHref
                       >
