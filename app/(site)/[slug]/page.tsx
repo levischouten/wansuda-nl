@@ -16,9 +16,7 @@ export async function generateStaticParams() {
   const pages = [...content, ...features];
 
   return pages.map((slug) => ({
-    params: {
-      slug,
-    },
+    slug,
   }));
 }
 
