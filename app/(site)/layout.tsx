@@ -17,17 +17,24 @@ export default async function RootLayout({
 
   const items = [
     {
-      label: "Home",
+      label: "Welkom",
       href: "/",
     },
     ...features.map((feature) => ({
       label: feature.entry.title || "",
       href: feature.slug,
-      items: feature.entry.items.map((item) => ({
-        label: item.title.name,
-        description: item.description,
-        href: item.title.slug,
-      })),
+      items: [
+        {
+          label: feature.entry.title || "",
+          description: feature.entry.description,
+          href: "",
+        },
+        ...feature.entry.items.map((item) => ({
+          label: item.title.name,
+          description: item.description,
+          href: item.title.slug,
+        })),
+      ],
     })),
     ...content.map((entry) => ({
       label: entry.entry.title || "",

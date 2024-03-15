@@ -13,7 +13,7 @@ export default config({
     },
     navigation: {
       Admin: ["settings"],
-      Pages: ["homepage", "features", "content"],
+      Pages: ["homepage", "contact", "features", "content"],
     },
   },
   singletons: {
@@ -100,6 +100,20 @@ export default config({
         }),
       },
     }),
+    contact: singleton({
+      label: "Contact Page",
+      path: "/content/contact",
+      schema: {
+        title: fields.text({ label: "Title" }),
+        content: fields.document({
+          label: "Content",
+          description: "The content of the page.",
+          formatting: true,
+          links: true,
+          images: true,
+        }),
+      },
+    }),
   },
   collections: {
     content: collection({
@@ -132,6 +146,11 @@ export default config({
             label: "Title",
             description: "The title of the page.",
           },
+        }),
+        description: fields.text({
+          label: "Description",
+          description: "The description of the page.",
+          multiline: true,
         }),
         header: fields.document({
           description: "The text to display in the header.",

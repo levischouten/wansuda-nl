@@ -69,7 +69,11 @@ export function Header(props: HeaderProps) {
                         <ListItem
                           key={nestedItem.label}
                           title={nestedItem.label}
-                          href={`/${item.href}#${nestedItem.href}`}
+                          href={
+                            nestedItem.href
+                              ? `/${item.href}#${nestedItem.href}`
+                              : `/${item.href}`
+                          }
                         >
                           {nestedItem.description}
                         </ListItem>
@@ -165,7 +169,7 @@ const ListItem = React.forwardRef<
   React.ComponentPropsWithoutRef<"a">
 >(({ className, title, children, ...props }, ref) => {
   return (
-    <li>
+    <li className="last:odd:col-span-2">
       <NavigationMenuLink asChild>
         <a
           ref={ref}

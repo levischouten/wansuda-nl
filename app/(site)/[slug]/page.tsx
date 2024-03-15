@@ -4,6 +4,7 @@ import { DocumentRenderer } from "@keystatic/core/renderer";
 import { ArrowRightIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { notFound } from "next/navigation";
 
 export async function generateStaticParams() {
   const reader = createReader(process.cwd(), keystaticConfig);
@@ -82,4 +83,6 @@ export default async function Page({ params }: { params: { slug: string } }) {
       </main>
     );
   }
+
+  return notFound();
 }
