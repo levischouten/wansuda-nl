@@ -10,25 +10,34 @@ export default async function RootLayout({
 }) {
   const reader = createReader(process.cwd(), keystaticConfig);
 
-  const settings = await reader.singletons.settings.read();
+  const [content, features] = await Promise.all([
+    reader.collections.content.all(),
+    reader.collections.features.all(),
+  ]);
 
-  const services = await reader.collections.services.all();
-  const courses = await reader.collections.courses.all();
+  const items = [
+    {
+      label: "Home",
+      href: "/",
+    },
+    ...features.map((feature) => ({
+      label: feature.entry.title || "",
+      href: feature.slug,
+      items: feature.entry.items.map((item) => ({
+        label: item.title.name,
+        description: item.description,
+        href: item.title.slug,
+      })),
+    })),
+    ...content.map((entry) => ({
+      label: entry.entry.title || "",
+      href: entry.slug,
+    })),
+  ];
 
   return (
     <>
-      <Header
-        courses={courses.map((course) => ({
-          title: course.entry.title,
-          description: course.entry.description,
-          slug: course.slug,
-        }))}
-        services={services.map((service) => ({
-          title: service.entry.title,
-          description: service.entry.description,
-          slug: service.slug,
-        }))}
-      />
+      <Header items={items} />
       {children}
       <Footer />
     </>

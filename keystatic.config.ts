@@ -13,13 +13,7 @@ export default config({
     },
     navigation: {
       Admin: ["settings"],
-      Pages: [
-        "homepage",
-        "servicespage",
-        "coursespage",
-        "terms-and-conditions-page",
-      ],
-      Collections: ["courses", "services"],
+      Pages: ["homepage", "features", "content"],
     },
   },
   singletons: {
@@ -27,49 +21,6 @@ export default config({
       label: "Settings",
       path: "/content/settings",
       schema: {},
-    }),
-    servicespage: singleton({
-      label: "Servicespage",
-      path: "/content/servicespage",
-      schema: {
-        headerText: fields.document({
-          description: "The text to display in the header.",
-          label: "Header Text",
-          formatting: {
-            headingLevels: [1],
-            inlineMarks: true,
-          },
-        }),
-      },
-    }),
-    coursespage: singleton({
-      label: "Coursespage",
-      path: "/content/coursespage",
-      schema: {
-        headerText: fields.document({
-          description: "The text to display in the header.",
-          label: "Header Text",
-          formatting: {
-            headingLevels: [1],
-            inlineMarks: true,
-          },
-        }),
-      },
-    }),
-    "terms-and-conditions-page": singleton({
-      label: "Terms and Conditions page",
-      path: "/content/terms-and-conditions",
-      schema: {
-        content: fields.document({
-          label: "Content",
-          description:
-            "The content to display on the terms and conditions page.",
-          formatting: {
-            headingLevels: [1],
-            inlineMarks: true,
-          },
-        }),
-      },
     }),
     homepage: singleton({
       label: "Homepage",
@@ -151,60 +102,74 @@ export default config({
     }),
   },
   collections: {
-    services: collection({
-      label: "Services",
+    content: collection({
+      label: "Content pages",
       slugField: "title",
-      path: "/content/services/*",
-      format: { contentField: "content" },
+      path: "/content/content/**",
       schema: {
-        title: fields.slug({ name: { label: "Title" } }),
-        description: fields.text({
-          label: "Description",
-          multiline: true,
-          description: "A short description of this service",
-        }),
-        content: fields.document({
-          description: "The content to display for this service",
-          label: "Content",
-          formatting: {
-            headingLevels: [2],
-            inlineMarks: true,
+        title: fields.slug({
+          name: {
+            label: "Title",
+            description: "The title of the page.",
           },
         }),
-        image: fields.image({
-          label: "Image",
-          directory: "public/site/images",
-          publicPath: "/site/images",
-          description: "The image to display for this service",
+        content: fields.document({
+          label: "Content",
+          description: "The content of the page.",
+          formatting: true,
+          links: true,
+          images: true,
         }),
       },
     }),
-    courses: collection({
-      label: "Courses",
+    features: collection({
+      label: "Feature pages",
       slugField: "title",
-      path: "/content/courses/*",
-      format: { contentField: "content" },
+      path: "/content/features/**",
       schema: {
-        title: fields.slug({ name: { label: "Title" } }),
-        description: fields.text({
-          label: "Description",
-          multiline: true,
-          description: "A short description of this course",
+        title: fields.slug({
+          name: {
+            label: "Title",
+            description: "The title of the page.",
+          },
         }),
-        content: fields.document({
-          description: "The content to display for this course",
-          label: "Content",
+        header: fields.document({
+          description: "The text to display in the header.",
+          label: "Header Text",
           formatting: {
-            headingLevels: [2],
+            headingLevels: [1],
             inlineMarks: true,
           },
         }),
-        image: fields.image({
-          label: "Image",
-          directory: "public/site/images",
-          publicPath: "/site/images",
-          description: "The image to display for this course",
-        }),
+        items: fields.array(
+          fields.object({
+            title: fields.slug({
+              name: {
+                label: "Title",
+                description: "The title of the page.",
+              },
+            }),
+            description: fields.text({
+              label: "Description",
+              description: "The description of the item.",
+              multiline: true,
+            }),
+            content: fields.document({
+              description: "The content to display for this item",
+              label: "Content",
+              formatting: {
+                headingLevels: [2],
+                inlineMarks: true,
+              },
+            }),
+            image: fields.image({
+              label: "Image",
+              directory: "public/site/images",
+              publicPath: "/site/images",
+              description: "The image to display for this item",
+            }),
+          })
+        ),
       },
     }),
   },

@@ -1,11 +1,11 @@
-import { createReader } from "@keystatic/core/reader";
-import keystaticConfig from "@/keystatic.config";
-import { DocumentRenderer } from "@keystatic/core/renderer";
 import { Button } from "@/components/ui/button";
-import Link from "next/link";
+import Icon from "@/components/ui/icon";
+import keystaticConfig from "@/keystatic.config";
+import { createReader } from "@keystatic/core/reader";
+import { DocumentRenderer } from "@keystatic/core/renderer";
 import { ArrowRightIcon } from "lucide-react";
 import Image from "next/image";
-import Icon from "@/components/ui/icon";
+import Link from "next/link";
 
 export default async function Home() {
   const reader = createReader(process.cwd(), keystaticConfig);
@@ -21,7 +21,7 @@ export default async function Home() {
       <section className="flex flex-col lg:flex-row items-start gap-12 lg:justify-between max-w-md lg:max-w-full mx-auto">
         <div className="max-w-md">
           <div className="prose">
-            <DocumentRenderer document={await homepage?.heroText()} />
+            <DocumentRenderer document={await homepage.heroText()} />
           </div>
           <div className="space-x-2">
             <Button asChild>
@@ -46,7 +46,7 @@ export default async function Home() {
       <section className="flex flex-col items-center gap-8">
         <div className="max-w-xl text-center">
           <div className="prose prose-h2:my-2 prose-h2:text-base prose-h2:text-primary prose-h3:text-3xl prose-h3:my-2">
-            <DocumentRenderer document={await homepage?.featureText()} />
+            <DocumentRenderer document={await homepage.featureText()} />
           </div>
         </div>
         <div className="max-w-3xl">
@@ -79,7 +79,7 @@ export default async function Home() {
         <div className="relative w-full h-[300px] lg:h-[400px] lg:w-[400px]">
           <div className="absolute inset-0 w-full h-full bg-gradient-to-tr from-primary via-primary/90 to-primary/50 rounded-lg">
             <div className="prose prose-p:text-primary-foreground prose-strong:text-primary-foreground prose-h4:text-primary-foreground prose-h4:text-2xl absolute bottom-0 p-4 prose-h4:font-bold">
-              <DocumentRenderer document={await homepage?.contentImageText()} />
+              <DocumentRenderer document={await homepage.contentImageText()} />
             </div>
           </div>
           <Image
@@ -92,7 +92,7 @@ export default async function Home() {
         </div>
         <div className="max-w-lg">
           <div className="prose prose-h2:my-2 prose-h2: prose-h2:text-base prose-h2:text-primary prose-h3:text-3xl prose-h3:my-2 prose-p:my-0 prose-p:py-3">
-            <DocumentRenderer document={await homepage?.contentText()} />
+            <DocumentRenderer document={await homepage.contentText()} />
           </div>
           <Link
             href="/behandelingen"

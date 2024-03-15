@@ -2,6 +2,11 @@
 
 import { Button } from "@/components/ui/button";
 import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from "@/components/ui/collapsible";
+import {
   NavigationMenu,
   NavigationMenuContent,
   NavigationMenuItem,
@@ -26,23 +31,23 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import React from "react";
-import {
-  Collapsible,
-  CollapsibleContent,
-  CollapsibleTrigger,
-} from "../ui/collapsible";
 
 type HeaderProps = {
-  services: {
-    title: string;
-    description: string;
-    slug: string;
-  }[];
-  courses: {
-    title: string;
-    description: string;
-    slug: string;
-  }[];
+  items: (
+    | {
+        label: string;
+        href: string;
+      }
+    | {
+        label: string;
+        href: string;
+        items: {
+          label: string;
+          description: string;
+          href: string;
+        }[];
+      }
+  )[];
 };
 
 export function Header(props: HeaderProps) {
@@ -53,52 +58,38 @@ export function Header(props: HeaderProps) {
       </Link>
       <NavigationMenu className="hidden lg:block">
         <NavigationMenuList>
-          <NavigationMenuItem>
-            <Link href="/" legacyBehavior passHref>
-              <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                Welkom
-              </NavigationMenuLink>
-            </Link>
-          </NavigationMenuItem>
-          <NavigationMenuItem>
-            <NavigationMenuTrigger>Behandelingen</NavigationMenuTrigger>
-            <NavigationMenuContent>
-              <ul className="grid gap-3 p-6 md:w-[400px] lg:w-[500px] grid-cols-1 md:grid-cols-2">
-                {props.services.map((service) => (
-                  <ListItem
-                    key={service.slug}
-                    title={service.title}
-                    href={`/behandelingen#${service.slug}`}
-                  >
-                    {service.description}
-                  </ListItem>
-                ))}
-              </ul>
-            </NavigationMenuContent>
-          </NavigationMenuItem>
-          <NavigationMenuItem>
-            <NavigationMenuTrigger>Cursussen</NavigationMenuTrigger>
-            <NavigationMenuContent>
-              <ul className="grid gap-3 p-6 md:w-[400px] lg:w-[500px] grid-cols-1 md:grid-cols-2">
-                {props.courses.map((course) => (
-                  <ListItem
-                    key={course.slug}
-                    title={course.title}
-                    href={`/cursussen#${course.slug}`}
-                  >
-                    {course.description}
-                  </ListItem>
-                ))}
-              </ul>
-            </NavigationMenuContent>
-          </NavigationMenuItem>
-          <NavigationMenuItem>
-            <Link href="/algemene-voorwaarden" legacyBehavior passHref>
-              <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                Algemene Voorwaarden
-              </NavigationMenuLink>
-            </Link>
-          </NavigationMenuItem>
+          {props.items.map((item) => {
+            if ("items" in item) {
+              return (
+                <NavigationMenuItem key={item.href}>
+                  <NavigationMenuTrigger>{item.label}</NavigationMenuTrigger>
+                  <NavigationMenuContent>
+                    <ul className="grid gap-3 p-6 md:w-[400px] lg:w-[500px] grid-cols-1 md:grid-cols-2">
+                      {item.items.map((nestedItem) => (
+                        <ListItem
+                          key={nestedItem.label}
+                          title={nestedItem.label}
+                          href={`/${item.href}#${nestedItem.href}`}
+                        >
+                          {nestedItem.description}
+                        </ListItem>
+                      ))}
+                    </ul>
+                  </NavigationMenuContent>
+                </NavigationMenuItem>
+              );
+            }
+
+            return (
+              <NavigationMenuItem key={item.label}>
+                <Link href={item.href} legacyBehavior passHref>
+                  <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                    {item.label}
+                  </NavigationMenuLink>
+                </Link>
+              </NavigationMenuItem>
+            );
+          })}
         </NavigationMenuList>
       </NavigationMenu>
 
@@ -115,70 +106,47 @@ export function Header(props: HeaderProps) {
             </SheetTitle>
           </SheetHeader>
           <ul className="space-y-2">
-            <li>
-              <Link href="/" legacyBehavior passHref>
-                <a className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground">
-                  Welkom
-                </a>
-              </Link>
-            </li>
-            <li>
-              <Collapsible className="group">
-                <CollapsibleTrigger className="w-full text-start flex justify-between items-center select-none rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground">
-                  Behandelingen
-                  <ChevronUpIcon className="w-4 h-4 group-data-[state=closed]:hidden" />
-                  <ChevronDownIcon className="w-4 h-4 group-data-[state=open]:hidden" />
-                </CollapsibleTrigger>
-                <CollapsibleContent className="py-3">
-                  <ul className="space-y-2">
-                    {props.services.map((service) => (
-                      <Link
-                        key={service.slug}
-                        href={`/behandelingen#${service.slug}`}
-                        legacyBehavior
-                        passHref
-                      >
-                        <a className="block select-none space-y-1 rounded-md py-3 px-6 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground">
-                          {service.title}
-                        </a>
-                      </Link>
-                    ))}
-                  </ul>
-                </CollapsibleContent>
-              </Collapsible>
-            </li>
-            <li>
-              <Collapsible className="group">
-                <CollapsibleTrigger className="w-full text-start flex justify-between items-center select-none rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground">
-                  Cursussen
-                  <ChevronUpIcon className="w-4 h-4 group-data-[state=closed]:hidden" />
-                  <ChevronDownIcon className="w-4 h-4 group-data-[state=open]:hidden" />
-                </CollapsibleTrigger>
-                <CollapsibleContent className="py-3">
-                  <ul className="space-y-2">
-                    {props.courses.map((course) => (
-                      <Link
-                        key={course.slug}
-                        href={`/cursussen#${course.slug}`}
-                        legacyBehavior
-                        passHref
-                      >
-                        <a className="block select-none space-y-1 rounded-md py-3 px-6 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground">
-                          {course.title}
-                        </a>
-                      </Link>
-                    ))}
-                  </ul>
-                </CollapsibleContent>
-              </Collapsible>
-            </li>
-            <li>
-              <Link href="/algemene-voorwaarden" legacyBehavior passHref>
-                <a className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground">
-                  Algemene Voorwaarden
-                </a>
-              </Link>
-            </li>
+            {props.items.map((item) => {
+              if ("items" in item) {
+                return (
+                  <li key={item.label}>
+                    <Collapsible className="group">
+                      <CollapsibleTrigger className="w-full text-start flex justify-between items-center select-none rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground">
+                        {item.label}
+                        <ChevronUpIcon className="w-4 h-4 group-data-[state=closed]:hidden" />
+                        <ChevronDownIcon className="w-4 h-4 group-data-[state=open]:hidden" />
+                      </CollapsibleTrigger>
+                      <CollapsibleContent className="py-3">
+                        <ul className="space-y-2">
+                          {item.items.map((nestedItem) => (
+                            <Link
+                              key={nestedItem.label}
+                              href={`/${item.href}#${nestedItem.href}`}
+                              legacyBehavior
+                              passHref
+                            >
+                              <a className="block select-none space-y-1 rounded-md py-3 px-6 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground">
+                                {nestedItem.label}
+                              </a>
+                            </Link>
+                          ))}
+                        </ul>
+                      </CollapsibleContent>
+                    </Collapsible>
+                  </li>
+                );
+              }
+
+              return (
+                <li key={item.href}>
+                  <Link href={item.href} legacyBehavior passHref>
+                    <a className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground">
+                      {item.label}
+                    </a>
+                  </Link>
+                </li>
+              );
+            })}
           </ul>
         </SheetContent>
       </Sheet>
