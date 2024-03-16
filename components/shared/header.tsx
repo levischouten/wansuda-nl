@@ -125,7 +125,11 @@ export function Header(props: HeaderProps) {
                           {item.items.map((nestedItem) => (
                             <Link
                               key={nestedItem.label}
-                              href={`/${item.href}#${nestedItem.href}`}
+                              href={
+                                nestedItem.href
+                                  ? `/${item.href}#${nestedItem.href}`
+                                  : `/${item.href}`
+                              }
                               legacyBehavior
                               passHref
                             >

@@ -1,4 +1,10 @@
 heroImage: /site/images/heroImage.JPG
+heroCta:
+  title: Bekijk behandelingen
+  href: /behandelingen
+heroSecondaryCta:
+  title: Lees meer
+  href: '#about'
 features:
   - title: Massage Meesterschap
     description: >-
@@ -13,3 +19,6 @@ features:
     href: /behandelingen
     icon: heart
 contentImage: /site/images/contentImage.jpg
+contentCta:
+  title: Lees meer over onze behandelingen
+  href: /behandelingen

@@ -40,6 +40,20 @@ export default config({
           directory: "public/site/images",
           publicPath: "/site/images",
         }),
+        heroCta: fields.object(
+          {
+            title: fields.text({ label: "Title" }),
+            href: fields.text({ label: "Link" }),
+          },
+          { label: "Hero CTA" }
+        ),
+        heroSecondaryCta: fields.object(
+          {
+            title: fields.text({ label: "Title" }),
+            href: fields.text({ label: "Link" }),
+          },
+          { label: "Hero Secondary CTA" }
+        ),
         featureText: fields.document({
           label: "Feature Text",
           description: "The text to display as the 'feature' text.",
@@ -98,6 +112,13 @@ export default config({
           dividers: true,
           links: true,
         }),
+        contentCta: fields.object(
+          {
+            title: fields.text({ label: "Title" }),
+            href: fields.text({ label: "Link" }),
+          },
+          { label: "Content CTA" }
+        ),
       },
     }),
     contact: singleton({

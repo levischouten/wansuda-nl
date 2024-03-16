@@ -46,7 +46,7 @@ export default async function RootLayout({
     <>
       <Header items={items} />
       {children}
-      <Footer />
+      <Footer items={items} />
     </>
   );
 }

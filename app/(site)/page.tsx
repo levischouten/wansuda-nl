@@ -18,18 +18,22 @@ export default async function Home() {
 
   return (
     <main className="max-w-screen-lg mx-auto px-8 pt-16 lg:pt-40 space-y-28 lg:space-y-40">
-      <section className="flex flex-col lg:flex-row items-start gap-12 lg:justify-between max-w-md lg:max-w-full mx-auto">
+      <section
+        id="hero"
+        className="flex flex-col lg:flex-row items-start gap-12 lg:justify-between max-w-md lg:max-w-full mx-auto"
+      >
         <div className="max-w-md">
           <div className="prose">
             <DocumentRenderer document={await homepage.heroText()} />
           </div>
           <div className="space-x-2">
             <Button asChild>
-              <Link href="/behandelingen">Bekijk behandelingen</Link>
+              <Link href={homepage.heroCta.href}>{homepage.heroCta.title}</Link>
             </Button>
             <Button asChild variant="ghost">
-              <Link href="/behandelingen">
-                Lees meer <ArrowRightIcon className="w-4 h-4 ml-2" />
+              <Link href={homepage.heroSecondaryCta.href}>
+                {homepage.heroSecondaryCta.title}{" "}
+                <ArrowRightIcon className="w-4 h-4 ml-2" />
               </Link>
             </Button>
           </div>
@@ -43,7 +47,7 @@ export default async function Home() {
         />
       </section>
 
-      <section className="flex flex-col items-center gap-8">
+      <section id="features" className="flex flex-col items-center gap-8">
         <div className="max-w-xl text-center">
           <div className="prose prose-h2:my-2 prose-h2:text-base prose-h2:text-primary prose-h3:text-3xl prose-h3:my-2">
             <DocumentRenderer document={await homepage.featureText()} />
@@ -63,7 +67,7 @@ export default async function Home() {
                   </div>
                   <Link
                     href={feature.href}
-                    className="flex gap-2 items-center text-sm text-primary md:pt-4"
+                    className="flex gap-2 items-center font-semibold text-sm text-primary md:pt-4"
                   >
                     Lees meer
                     <ArrowRightIcon className="w-4 h-4" />
@@ -75,7 +79,10 @@ export default async function Home() {
         </div>
       </section>
 
-      <section className="flex flex-col lg:flex-row items-start justify-between gap-20 max-w-xl lg:max-w-none mx-auto lg:mx-0">
+      <section
+        id="about"
+        className="flex flex-col lg:flex-row items-start justify-between gap-20 max-w-xl lg:max-w-none mx-auto lg:mx-0"
+      >
         <div className="relative w-full h-[300px] lg:h-[400px] lg:w-[400px]">
           <div className="absolute inset-0 w-full h-full bg-gradient-to-tr from-primary via-primary/90 to-primary/50 rounded-lg">
             <div className="prose prose-p:text-primary-foreground prose-strong:text-primary-foreground prose-h4:text-primary-foreground prose-h4:text-2xl absolute bottom-0 p-4 prose-h4:font-bold">
@@ -95,10 +102,10 @@ export default async function Home() {
             <DocumentRenderer document={await homepage.contentText()} />
           </div>
           <Link
-            href="/behandelingen"
+            href={homepage.contentCta.href}
             className="flex gap-2 items-center text-primary font-semibold"
           >
-            Lees meer over onze diensten
+            {homepage.contentCta.title}
             <ArrowRightIcon className="w-4 h-4" />
           </Link>
         </div>

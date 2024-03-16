@@ -64,7 +64,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
                   </div>
                   <Link
                     href="/contact"
-                    className="flex gap-2 items-center text-primary"
+                    className="flex gap-2 items-center text-primary font-semibold"
                   >
                     Boek nu <ArrowRightIcon className="w-4 h-4" />
                   </Link>
