@@ -26,20 +26,26 @@ export default async function Home() {
   }
 
   return (
-    <main className="mx-auto max-w-screen-lg space-y-28 px-8 pt-16 lg:space-y-40 lg:pt-40">
+    <main className="mx-auto max-w-screen-lg space-y-28 px-8 lg:space-y-40">
       <section
         id="hero"
-        className="mx-auto flex max-w-lg flex-col items-start gap-12 lg:max-w-full lg:flex-row lg:justify-between"
+        className="lg:hero mx-auto box-border flex max-w-lg flex-col items-start gap-12 pt-16 lg:max-w-full lg:flex-row lg:justify-between lg:pt-40"
+        hidden
       >
-        <div className="max-w-lg">
+        <div className="max-w-lg space-y-8">
           <div className="prose prose-sm md:prose-base">
             <DocumentRenderer document={await homepage.heroText()} />
           </div>
           <div className="space-x-2">
-            <Button asChild>
+            <Button asChild size="lg">
               <Link href={homepage.heroCta.href}>{homepage.heroCta.title}</Link>
             </Button>
-            <Button asChild variant="ghost">
+            <Button
+              asChild
+              variant="outline"
+              size="lg"
+              className="hidden sm:inline-flex"
+            >
               <Link href={homepage.heroSecondaryCta.href}>
                 {homepage.heroSecondaryCta.title}{" "}
                 <ArrowRightIcon className="ml-2 h-4 w-4" />
@@ -56,7 +62,10 @@ export default async function Home() {
         />
       </section>
 
-      <section id="features" className="flex flex-col items-center gap-8">
+      <section
+        id="features"
+        className="mt-28 flex flex-col items-center gap-8 lg:mt-0"
+      >
         <div className="max-w-xl text-center">
           <div className="prose prose-sm md:prose-base prose-h2:my-2 prose-h2:text-base prose-h2:text-primary prose-h3:my-2 prose-h3:text-2xl md:prose-h3:text-3xl">
             <DocumentRenderer document={await homepage.featureText()} />
@@ -67,7 +76,7 @@ export default async function Home() {
             {homepage.features?.map((feature) => (
               <li key={feature.title} className="flex gap-4">
                 <div className="self-start rounded-sm bg-primary p-2 text-primary-foreground">
-                  <Icon name={feature.icon} className="h-5 w-5" />
+                  <Icon name={feature.icon} className="h-6 w-6" />
                 </div>
                 <div className="flex flex-col justify-between gap-4">
                   <div className="space-y-4">
@@ -76,7 +85,7 @@ export default async function Home() {
                   </div>
                   <Link
                     href={feature.href}
-                    className="flex items-center gap-2 text-sm font-semibold text-primary md:pt-4"
+                    className="flex items-center gap-2 font-semibold text-primary md:pt-4"
                   >
                     Lees meer
                     <ArrowRightIcon className="h-4 w-4" />

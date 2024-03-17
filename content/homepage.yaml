@@ -3,8 +3,8 @@ heroCta:
   title: Bekijk diensten
   href: /behandelingen
 heroSecondaryCta:
-  title: Lees meer
-  href: '#about'
+  title: Wat we doen
+  href: "#about"
 features:
   - title: Massage Meesterschap
     description: >-

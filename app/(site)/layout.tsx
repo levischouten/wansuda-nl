@@ -24,18 +24,11 @@ export default async function RootLayout({
     ...features.map((feature) => ({
       label: feature.entry.title || "",
       href: feature.slug,
-      items: [
-        {
-          label: "Overzicht",
-          description: feature.entry.description,
-          href: "",
-        },
-        ...feature.entry.items.map((item) => ({
-          label: item.title.name,
-          description: item.description,
-          href: item.title.slug,
-        })),
-      ],
+      items: feature.entry.items.map((item) => ({
+        label: item.title.name,
+        description: item.description,
+        href: item.title.slug,
+      })),
     })),
     ...content.map((entry) => ({
       label: entry.entry.title || "",

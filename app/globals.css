@@ -54,7 +54,12 @@
     @apply border-border;
     @apply scroll-smooth;
   }
+
   body {
     @apply bg-background text-foreground;
+  }
+
+  .hero {
+    height: calc(100vh - theme(spacing.12));
   }
 }

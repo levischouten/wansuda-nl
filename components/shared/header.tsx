@@ -27,11 +27,15 @@ import {
   ArrowRightIcon,
   ChevronDownIcon,
   ChevronUpIcon,
+  MailIcon,
   MenuIcon,
+  PhoneIcon,
+  PhoneOutgoingIcon,
 } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import React from "react";
+import { Logo } from "./logo";
 
 type HeaderProps = {
   items: (
@@ -56,8 +60,8 @@ export function Header(props: HeaderProps) {
 
   return (
     <header className="mx-auto flex max-w-screen-lg items-center justify-between px-8 py-4">
-      <Link href="/" legacyBehavior passHref>
-        <Image src="/logo.png" alt="Logo" width={32} height={32} />
+      <Link href="/">
+        <Logo />
       </Link>
       <NavigationMenu className="hidden lg:block">
         <NavigationMenuList>
@@ -65,7 +69,9 @@ export function Header(props: HeaderProps) {
             if ("items" in item) {
               return (
                 <NavigationMenuItem key={item.href}>
-                  <NavigationMenuTrigger>{item.label}</NavigationMenuTrigger>
+                  <NavigationMenuTrigger>
+                    <Link href={item.href}>{item.label}</Link>
+                  </NavigationMenuTrigger>
                   <NavigationMenuContent>
                     <ul className="grid grid-cols-1 gap-3 p-6 md:w-[400px] md:grid-cols-2 lg:w-[500px]">
                       {item.items.map((nestedItem) => (
@@ -108,8 +114,8 @@ export function Header(props: HeaderProps) {
         </Button>
         <SheetContent className="flex w-full max-w-full flex-col space-y-4 sm:w-[500px]">
           <SheetHeader className="p-3">
-            <SheetTitle className="text-lg font-bold uppercase">
-              <Image src="/logo.png" alt="Logo" width={32} height={32} />
+            <SheetTitle>
+              <Logo />
             </SheetTitle>
           </SheetHeader>
           <div className="flex h-full flex-col justify-between">
@@ -176,9 +182,9 @@ export function Header(props: HeaderProps) {
         </SheetContent>
       </Sheet>
 
-      <Button asChild variant="ghost" className="hidden lg:flex">
+      <Button asChild className="hidden lg:flex">
         <Link href="/contact">
-          Contact <ArrowRightIcon className="ml-2 h-4 w-4" />
+          Contact <MailIcon className="ml-2 h-4 w-4" />
         </Link>
       </Button>
     </header>
