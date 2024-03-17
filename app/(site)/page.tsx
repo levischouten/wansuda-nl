@@ -107,7 +107,7 @@ export default async function Home() {
           />
         </div>
         <div className="max-w-lg">
-          <div className="prose-h2: prose prose-sm md:prose md:prose-base prose-h2:my-2 prose-h2:text-base prose-h2:text-primary prose-h3:my-2 prose-h3:text-2xl prose-p:my-0 prose-p:py-3 md:prose-h3:text-3xl">
+          <div className="prose-h2: prose prose-sm md:prose prose-h2:my-2 prose-h2:text-base prose-h2:text-primary prose-h3:my-2 prose-h3:text-2xl prose-p:my-0 prose-p:py-3 md:prose-h3:text-3xl">
             <DocumentRenderer document={await homepage.contentText()} />
           </div>
           <Link

@@ -20,7 +20,20 @@ export default config({
     settings: singleton({
       label: "Settings",
       path: "/content/settings",
-      schema: {},
+      schema: {
+        email: fields.text({
+          label: "Email",
+          description: "The email address to use for contact forms.",
+        }),
+        phone: fields.text({
+          label: "Phone",
+          description: "The phone number to use for contact forms.",
+        }),
+        facebook: fields.text({
+          label: "Facebook",
+          description: "The Facebook page to link to.",
+        }),
+      },
     }),
     homepage: singleton({
       label: "Homepage",
@@ -45,14 +58,14 @@ export default config({
             title: fields.text({ label: "Title" }),
             href: fields.text({ label: "Link" }),
           },
-          { label: "Hero CTA" }
+          { label: "Hero CTA" },
         ),
         heroSecondaryCta: fields.object(
           {
             title: fields.text({ label: "Title" }),
             href: fields.text({ label: "Link" }),
           },
-          { label: "Hero Secondary CTA" }
+          { label: "Hero Secondary CTA" },
         ),
         featureText: fields.document({
           label: "Feature Text",
@@ -94,7 +107,7 @@ export default config({
                 max: 2,
               },
             },
-          }
+          },
         ),
         contentText: fields.document({
           label: "Content Text",
@@ -127,7 +140,7 @@ export default config({
             title: fields.text({ label: "Title" }),
             href: fields.text({ label: "Link" }),
           },
-          { label: "Content CTA" }
+          { label: "Content CTA" },
         ),
       },
     }),
@@ -227,7 +240,7 @@ export default config({
             {
               label: "Item",
               description: "Configure the item to display on the page.",
-            }
+            },
           ),
           {
             label: "Items",
@@ -235,7 +248,7 @@ export default config({
             itemLabel(props) {
               return props.fields.title.value.name || "Untitled";
             },
-          }
+          },
         ),
       },
     }),

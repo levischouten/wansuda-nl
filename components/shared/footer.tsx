@@ -1,5 +1,8 @@
 import { FacebookIcon, MailIcon } from "lucide-react";
 import Link from "next/link";
+import { Button } from "../ui/button";
+import { Entry } from "@keystatic/core/reader";
+import keystaticConfig from "@/keystatic.config";
 
 type FooterProps = {
   items: (
@@ -17,6 +20,7 @@ type FooterProps = {
         }[];
       }
   )[];
+  settings: Entry<(typeof keystaticConfig)["singletons"]["settings"]>;
 };
 
 export function Footer(props: FooterProps) {
@@ -58,9 +62,17 @@ export function Footer(props: FooterProps) {
           );
         })}
       </ul>
-      <div className="flex gap-8 text-muted-foreground">
-        <FacebookIcon className="h-4 w-4" />
-        <MailIcon className="h-4 w-4" />
+      <div className="flex gap-2 text-muted-foreground">
+        <Button size="icon" variant="ghost" asChild>
+          <Link href={props.settings.facebook} target="_blank">
+            <FacebookIcon className="h-4 w-4" />
+          </Link>
+        </Button>
+        <Button size="icon" variant="ghost" asChild>
+          <Link href={`mailto:${props.settings.email}`} target="_blank">
+            <MailIcon className="h-4 w-4" />
+          </Link>
+        </Button>
       </div>
       <p className="text-xs text-muted-foreground">
         © {year} Wansuda. Alle rechten voorbehouden.

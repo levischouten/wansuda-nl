@@ -10,9 +10,10 @@ export default async function RootLayout({
 }) {
   const reader = createReader(process.cwd(), keystaticConfig);
 
-  const [content, features] = await Promise.all([
+  const [content, features, settings] = await Promise.all([
     reader.collections.content.all(),
     reader.collections.features.all(),
+    reader.singletons.settings.read(),
   ]);
 
   const items = [
@@ -46,7 +47,7 @@ export default async function RootLayout({
     <>
       <Header items={items} />
       {children}
-      <Footer items={items} />
+      <Footer items={items} settings={settings!} />
     </>
   );
 }
