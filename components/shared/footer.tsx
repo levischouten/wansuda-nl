@@ -23,8 +23,8 @@ export function Footer(props: FooterProps) {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="flex flex-col items-center text-sm pb-20 pt-48 gap-8 max-w-screen-lg mx-auto px-8">
-      <ul className="flex gap-8 md:gap-12 flex-col md:flex-row justify-start md:justify-center w-full">
+    <footer className="mx-auto flex max-w-screen-lg flex-col items-center gap-8 px-8 pb-20 pt-48 text-sm">
+      <ul className="flex w-full flex-col justify-start gap-8 md:flex-row md:justify-center md:gap-12">
         {props.items.map((item) => {
           if ("items" in item) {
             return (
@@ -59,8 +59,8 @@ export function Footer(props: FooterProps) {
         })}
       </ul>
       <div className="flex gap-8 text-muted-foreground">
-        <FacebookIcon className="w-4 h-4" />
-        <MailIcon className="w-4 h-4" />
+        <FacebookIcon className="h-4 w-4" />
+        <MailIcon className="h-4 w-4" />
       </div>
       <p className="text-xs text-muted-foreground">
         © {year} Wansuda. Alle rechten voorbehouden.

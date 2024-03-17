@@ -52,8 +52,10 @@ type HeaderProps = {
 };
 
 export function Header(props: HeaderProps) {
+  const [open, setOpen] = React.useState(false);
+
   return (
-    <header className="justify-between items-center max-w-screen-lg mx-auto py-4 px-8 flex">
+    <header className="mx-auto flex max-w-screen-lg items-center justify-between px-8 py-4">
       <Link href="/" legacyBehavior passHref>
         <Image src="/logo.png" alt="Logo" width={32} height={32} />
       </Link>
@@ -65,7 +67,7 @@ export function Header(props: HeaderProps) {
                 <NavigationMenuItem key={item.href}>
                   <NavigationMenuTrigger>{item.label}</NavigationMenuTrigger>
                   <NavigationMenuContent>
-                    <ul className="grid gap-3 p-6 md:w-[400px] lg:w-[500px] grid-cols-1 md:grid-cols-2">
+                    <ul className="grid grid-cols-1 gap-3 p-6 md:w-[400px] md:grid-cols-2 lg:w-[500px]">
                       {item.items.map((nestedItem) => (
                         <ListItem
                           key={nestedItem.label}
@@ -98,71 +100,85 @@ export function Header(props: HeaderProps) {
         </NavigationMenuList>
       </NavigationMenu>
 
-      <Sheet>
+      <Sheet open={open} onOpenChange={setOpen}>
         <Button asChild variant="ghost" size="icon" className="lg:hidden">
           <SheetTrigger>
-            <MenuIcon className="w-5 h-5" />
+            <MenuIcon className="h-5 w-5" />
           </SheetTrigger>
         </Button>
-        <SheetContent className="sm:w-[500px] w-full max-w-full space-y-4">
+        <SheetContent className="flex w-full max-w-full flex-col space-y-4 sm:w-[500px]">
           <SheetHeader className="p-3">
-            <SheetTitle className="uppercase font-bold text-lg">
+            <SheetTitle className="text-lg font-bold uppercase">
               <Image src="/logo.png" alt="Logo" width={32} height={32} />
             </SheetTitle>
           </SheetHeader>
-          <ul className="space-y-2">
-            {props.items.map((item) => {
-              if ("items" in item) {
+          <div className="flex h-full flex-col justify-between">
+            <ul className="space-y-2">
+              {props.items.map((item) => {
+                if ("items" in item) {
+                  return (
+                    <li key={item.label}>
+                      <Collapsible className="group">
+                        <CollapsibleTrigger className="flex w-full select-none items-center justify-between rounded-md p-3 text-start leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground">
+                          {item.label}
+                          <ChevronUpIcon className="h-4 w-4 group-data-[state=closed]:hidden" />
+                          <ChevronDownIcon className="h-4 w-4 group-data-[state=open]:hidden" />
+                        </CollapsibleTrigger>
+                        <CollapsibleContent className="py-3">
+                          <ul className="space-y-2">
+                            {item.items.map((nestedItem) => (
+                              <Link
+                                key={nestedItem.label}
+                                href={
+                                  nestedItem.href
+                                    ? `/${item.href}#${nestedItem.href}`
+                                    : `/${item.href}`
+                                }
+                                legacyBehavior
+                                passHref
+                              >
+                                <a
+                                  className="block select-none space-y-1 rounded-md px-6 py-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+                                  onClick={() => setOpen(false)}
+                                >
+                                  {nestedItem.label}
+                                </a>
+                              </Link>
+                            ))}
+                          </ul>
+                        </CollapsibleContent>
+                      </Collapsible>
+                    </li>
+                  );
+                }
+
                 return (
-                  <li key={item.label}>
-                    <Collapsible className="group">
-                      <CollapsibleTrigger className="w-full text-start flex justify-between items-center select-none rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground">
+                  <li key={item.href}>
+                    <Link href={item.href} legacyBehavior passHref>
+                      <a
+                        className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+                        onClick={() => setOpen(false)}
+                      >
                         {item.label}
-                        <ChevronUpIcon className="w-4 h-4 group-data-[state=closed]:hidden" />
-                        <ChevronDownIcon className="w-4 h-4 group-data-[state=open]:hidden" />
-                      </CollapsibleTrigger>
-                      <CollapsibleContent className="py-3">
-                        <ul className="space-y-2">
-                          {item.items.map((nestedItem) => (
-                            <Link
-                              key={nestedItem.label}
-                              href={
-                                nestedItem.href
-                                  ? `/${item.href}#${nestedItem.href}`
-                                  : `/${item.href}`
-                              }
-                              legacyBehavior
-                              passHref
-                            >
-                              <a className="block select-none space-y-1 rounded-md py-3 px-6 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground">
-                                {nestedItem.label}
-                              </a>
-                            </Link>
-                          ))}
-                        </ul>
-                      </CollapsibleContent>
-                    </Collapsible>
+                      </a>
+                    </Link>
                   </li>
                 );
-              }
+              })}
+            </ul>
 
-              return (
-                <li key={item.href}>
-                  <Link href={item.href} legacyBehavior passHref>
-                    <a className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground">
-                      {item.label}
-                    </a>
-                  </Link>
-                </li>
-              );
-            })}
-          </ul>
+            <Button asChild className="w-full self-start">
+              <Link href="/contact" onClick={() => setOpen(false)}>
+                Contact <ArrowRightIcon className="ml-2 h-4 w-4" />
+              </Link>
+            </Button>
+          </div>
         </SheetContent>
       </Sheet>
 
-      <Button asChild variant="ghost" size="default" className="hidden lg:flex">
+      <Button asChild variant="ghost" className="hidden lg:flex">
         <Link href="/contact">
-          Contact <ArrowRightIcon className="ml-2 w-4 h-4" />
+          Contact <ArrowRightIcon className="ml-2 h-4 w-4" />
         </Link>
       </Button>
     </header>
@@ -180,7 +196,7 @@ const ListItem = React.forwardRef<
           ref={ref}
           className={cn(
             "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground",
-            className
+            className,
           )}
           {...props}
         >

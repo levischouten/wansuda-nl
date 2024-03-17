@@ -21,9 +21,9 @@ export default async function Contact() {
   }
 
   return (
-    <main className="max-w-screen-lg mx-auto px-8 pt-16 lg:pt-40 space-y-20 lg:space-y-40">
+    <main className="mx-auto max-w-screen-lg space-y-20 px-8 pt-16 lg:space-y-40 lg:pt-40">
       <section className="">
-        <div className="prose-sm md:prose mx-auto">
+        <div className="prose prose-sm mx-auto md:prose md:prose-base">
           <DocumentRenderer document={await contact.content()} />
         </div>
       </section>

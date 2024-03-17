@@ -24,7 +24,7 @@ export async function generateStaticParams() {
 
 export async function generateMetadata(
   { params }: { params: { slug: string } },
-  parent: ResolvingMetadata
+  parent: ResolvingMetadata,
 ) {
   const reader = createReader(process.cwd(), keystaticConfig);
 
@@ -52,9 +52,9 @@ export default async function Page({ params }: { params: { slug: string } }) {
 
   if (content) {
     return (
-      <main className="max-w-screen-lg mx-auto px-8 pt-16 lg:pt-40 space-y-20 lg:space-y-40">
+      <main className="mx-auto max-w-screen-lg space-y-20 px-8 pt-16 lg:space-y-40 lg:pt-40">
         <section className="">
-          <div className="prose-sm md:prose mx-auto">
+          <div className="prose prose-sm mx-auto md:prose md:prose-base">
             <DocumentRenderer document={await content.content()} />
           </div>
         </section>
@@ -64,9 +64,9 @@ export default async function Page({ params }: { params: { slug: string } }) {
 
   if (features) {
     return (
-      <main className="max-w-screen-lg mx-auto px-8 pt-16 lg:pt-40 space-y-20 lg:space-y-40">
+      <main className="mx-auto max-w-screen-lg space-y-20 px-8 pt-16 lg:space-y-40 lg:pt-40">
         <section className="flex justify-center">
-          <div className="prose-sm md:prose text-center">
+          <div className="prose prose-sm text-center md:prose md:prose-base">
             <DocumentRenderer document={await features.header()} />
           </div>
         </section>
@@ -77,17 +77,17 @@ export default async function Page({ params }: { params: { slug: string } }) {
               <section
                 key={item.title.slug}
                 id={item.title.slug}
-                className="flex gap-16 flex-col items-center lg:items-start max-w-screen-sm lg:max-w-full mx-auto even:lg:flex-row-reverse lg:flex-row"
+                className="mx-auto flex max-w-screen-sm flex-col items-center gap-16 lg:max-w-full lg:flex-row lg:items-start even:lg:flex-row-reverse"
               >
                 <div className="space-y-2">
-                  <div className="prose-sm md:prose prose-h2:mt-0 prose-h2:text-2xl prose-h2:font-semibold md:prose-h2:text-3xl">
+                  <div className="prose prose-sm md:prose md:prose-base prose-h2:mt-0 prose-h2:text-2xl md:prose-h2:text-3xl">
                     <DocumentRenderer document={await item.content()} />
                   </div>
                   <Link
                     href="/contact"
-                    className="flex gap-2 items-center text-primary font-semibold"
+                    className="flex items-center gap-2 font-semibold text-primary"
                   >
-                    Boek nu <ArrowRightIcon className="w-4 h-4" />
+                    Boek nu <ArrowRightIcon className="h-4 w-4" />
                   </Link>
                 </div>
                 <Image
@@ -95,10 +95,10 @@ export default async function Page({ params }: { params: { slug: string } }) {
                   width={400}
                   height={400}
                   alt="Course image"
-                  className="object-cover w-full lg:w-[400px] rounded-lg aspect-square max-h-[400px]"
+                  className="aspect-square max-h-[400px] w-full rounded-lg object-cover lg:w-[400px]"
                 />
               </section>
-            ))
+            )),
           )}
         </div>
       </main>
