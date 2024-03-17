@@ -8,3 +8,8 @@ items:
        Deze massage geeft een gevoel van rust en heeft daarbij ook een helende
         werking op lichaam en geest
     image: /site/images/cursussen/items/0/image.jpg
+  - title:
+      name: De Sportcursusses
+      slug: de-sportcursusses
+    description: Leer alles wat er valt te leren over het genezen van sportblessures
+    image: /site/images/cursussen/items/1/image.png

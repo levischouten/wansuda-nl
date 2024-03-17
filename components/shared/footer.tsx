@@ -24,14 +24,17 @@ export function Footer(props: FooterProps) {
 
   return (
     <footer className="flex flex-col items-center text-sm pb-20 pt-48 gap-8 max-w-screen-lg mx-auto px-8">
-      <ul className="flex gap-10 flex-col md:flex-row justify-start md:justify-center w-full">
+      <ul className="flex gap-8 md:gap-12 flex-col md:flex-row justify-start md:justify-center w-full">
         {props.items.map((item) => {
           if ("items" in item) {
             return (
               <li key={item.href} className="flex flex-col gap-2">
                 <ul className="flex flex-col gap-2">
+                  <li className="font-semibold">
+                    <Link href={item.href}>{item.label}</Link>
+                  </li>
                   {item.items.map((nestedItem) => (
-                    <li key={nestedItem.href} className="first:font-semibold">
+                    <li key={nestedItem.href}>
                       <Link
                         href={
                           nestedItem.href

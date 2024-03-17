@@ -13,7 +13,7 @@ export default config({
     },
     navigation: {
       Admin: ["settings"],
-      Pages: ["homepage", "contact", "features", "content"],
+      Pages: ["homepage", "contact", "---", "features", "content"],
     },
   },
   singletons: {
@@ -83,7 +83,17 @@ export default config({
             }),
           }),
           {
+            label: "Features",
             description: "The features to display on the homepage.",
+            itemLabel(props) {
+              return props.fields.title.value || "Untitled";
+            },
+            validation: {
+              length: {
+                min: 2,
+                max: 2,
+              },
+            },
           }
         ),
         contentText: fields.document({
@@ -141,6 +151,10 @@ export default config({
       label: "Content pages",
       slugField: "title",
       path: "/content/content/**",
+      entryLayout: "content",
+      format: {
+        contentField: "content",
+      },
       schema: {
         title: fields.slug({
           name: {
@@ -182,33 +196,46 @@ export default config({
           },
         }),
         items: fields.array(
-          fields.object({
-            title: fields.slug({
-              name: {
-                label: "Title",
-                description: "The title of the page.",
-              },
-            }),
-            description: fields.text({
-              label: "Description",
-              description: "The description of the item.",
-              multiline: true,
-            }),
-            content: fields.document({
-              description: "The content to display for this item",
-              label: "Content",
-              formatting: {
-                headingLevels: [2],
-                inlineMarks: true,
-              },
-            }),
-            image: fields.image({
-              label: "Image",
-              directory: "public/site/images",
-              publicPath: "/site/images",
-              description: "The image to display for this item",
-            }),
-          })
+          fields.object(
+            {
+              title: fields.slug({
+                name: {
+                  label: "Title",
+                  description: "The title of the item.",
+                },
+              }),
+              description: fields.text({
+                label: "Description",
+                description: "The description of the item.",
+                multiline: true,
+              }),
+              content: fields.document({
+                description: "The content to display for this item",
+                label: "Content",
+                formatting: {
+                  headingLevels: [2],
+                  inlineMarks: true,
+                },
+              }),
+              image: fields.image({
+                label: "Image",
+                directory: "public/site/images",
+                publicPath: "/site/images",
+                description: "The image to display for this item",
+              }),
+            },
+            {
+              label: "Item",
+              description: "Configure the item to display on the page.",
+            }
+          ),
+          {
+            label: "Items",
+            description: "The items to display on the page.",
+            itemLabel(props) {
+              return props.fields.title.value.name || "Untitled";
+            },
+          }
         ),
       },
     }),

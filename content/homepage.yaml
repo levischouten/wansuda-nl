@@ -1,6 +1,6 @@
-heroImage: /site/images/heroImage.JPG
+heroImage: /site/images/heroImage.jpg
 heroCta:
-  title: Bekijk behandelingen
+  title: Bekijk diensten
   href: /behandelingen
 heroSecondaryCta:
   title: Lees meer

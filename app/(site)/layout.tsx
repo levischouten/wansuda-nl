@@ -25,7 +25,7 @@ export default async function RootLayout({
       href: feature.slug,
       items: [
         {
-          label: feature.entry.title || "",
+          label: "Overzicht",
           description: feature.entry.description,
           href: "",
         },

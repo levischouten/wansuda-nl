@@ -30,6 +30,7 @@ import {
   MenuIcon,
 } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 import React from "react";
 
 type HeaderProps = {
@@ -54,7 +55,7 @@ export function Header(props: HeaderProps) {
   return (
     <header className="justify-between items-center max-w-screen-lg mx-auto py-4 px-8 flex">
       <Link href="/" legacyBehavior passHref>
-        <h1 className="uppercase font-bold text-lg">Icon</h1>
+        <Image src="/logo.png" alt="Logo" width={32} height={32} />
       </Link>
       <NavigationMenu className="hidden lg:block">
         <NavigationMenuList>
@@ -106,7 +107,7 @@ export function Header(props: HeaderProps) {
         <SheetContent className="sm:w-[500px] w-full max-w-full space-y-4">
           <SheetHeader className="p-3">
             <SheetTitle className="uppercase font-bold text-lg">
-              ICON
+              <Image src="/logo.png" alt="Logo" width={32} height={32} />
             </SheetTitle>
           </SheetHeader>
           <ul className="space-y-2">
@@ -173,7 +174,7 @@ const ListItem = React.forwardRef<
   React.ComponentPropsWithoutRef<"a">
 >(({ className, title, children, ...props }, ref) => {
   return (
-    <li className="last:odd:col-span-2">
+    <li>
       <NavigationMenuLink asChild>
         <a
           ref={ref}

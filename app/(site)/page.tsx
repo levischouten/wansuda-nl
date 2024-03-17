@@ -4,8 +4,17 @@ import keystaticConfig from "@/keystatic.config";
 import { createReader } from "@keystatic/core/reader";
 import { DocumentRenderer } from "@keystatic/core/renderer";
 import { ArrowRightIcon } from "lucide-react";
+import { ResolvingMetadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+
+export async function generateMetadata({}, parent: ResolvingMetadata) {
+  const rootMetadata = await parent;
+
+  return {
+    title: `${rootMetadata.title?.absolute} - Welkom`,
+  };
+}
 
 export default async function Home() {
   const reader = createReader(process.cwd(), keystaticConfig);
@@ -20,9 +29,9 @@ export default async function Home() {
     <main className="max-w-screen-lg mx-auto px-8 pt-16 lg:pt-40 space-y-28 lg:space-y-40">
       <section
         id="hero"
-        className="flex flex-col lg:flex-row items-start gap-12 lg:justify-between max-w-md lg:max-w-full mx-auto"
+        className="flex flex-col lg:flex-row items-start gap-12 lg:justify-between max-w-lg lg:max-w-full mx-auto"
       >
-        <div className="max-w-md">
+        <div className="max-w-lg">
           <div className="prose">
             <DocumentRenderer document={await homepage.heroText()} />
           </div>
@@ -84,7 +93,7 @@ export default async function Home() {
         className="flex flex-col lg:flex-row items-start justify-between gap-20 max-w-xl lg:max-w-none mx-auto lg:mx-0"
       >
         <div className="relative w-full h-[300px] lg:h-[400px] lg:w-[400px]">
-          <div className="absolute inset-0 w-full h-full bg-gradient-to-tr from-primary via-primary/90 to-primary/50 rounded-lg">
+          <div className="absolute inset-0 w-full h-full bg-gradient-to-tr from-black/100 from-5% via-80% via-primary/80 to-primary/40 rounded-lg">
             <div className="prose prose-p:text-primary-foreground prose-strong:text-primary-foreground prose-h4:text-primary-foreground prose-h4:text-2xl absolute bottom-0 p-4 prose-h4:font-bold">
               <DocumentRenderer document={await homepage.contentImageText()} />
             </div>

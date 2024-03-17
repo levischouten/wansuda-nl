@@ -2,6 +2,7 @@ import keystaticConfig from "@/keystatic.config";
 import { createReader } from "@keystatic/core/reader";
 import { DocumentRenderer } from "@keystatic/core/renderer";
 import { ArrowRightIcon } from "lucide-react";
+import { ResolvingMetadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -19,6 +20,26 @@ export async function generateStaticParams() {
   return pages.map((slug) => ({
     slug,
   }));
+}
+
+export async function generateMetadata(
+  { params }: { params: { slug: string } },
+  parent: ResolvingMetadata
+) {
+  const reader = createReader(process.cwd(), keystaticConfig);
+
+  const [content, features] = await Promise.all([
+    reader.collections.content.read(params.slug),
+    reader.collections.features.read(params.slug),
+  ]);
+
+  const title = content?.title || features?.title;
+
+  const rootMetadata = await parent;
+
+  return {
+    title: `${rootMetadata.title?.absolute} - ${title}`,
+  };
 }
 
 export default async function Page({ params }: { params: { slug: string } }) {
