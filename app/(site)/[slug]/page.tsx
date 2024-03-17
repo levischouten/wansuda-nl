@@ -54,7 +54,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
     return (
       <main className="max-w-screen-lg mx-auto px-8 pt-16 lg:pt-40 space-y-20 lg:space-y-40">
         <section className="">
-          <div className="prose mx-auto">
+          <div className="prose-sm md:prose mx-auto">
             <DocumentRenderer document={await content.content()} />
           </div>
         </section>
@@ -66,7 +66,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
     return (
       <main className="max-w-screen-lg mx-auto px-8 pt-16 lg:pt-40 space-y-20 lg:space-y-40">
         <section className="flex justify-center">
-          <div className="prose text-center">
+          <div className="prose-sm md:prose text-center">
             <DocumentRenderer document={await features.header()} />
           </div>
         </section>
@@ -80,7 +80,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
                 className="flex gap-16 flex-col items-center lg:items-start max-w-screen-sm lg:max-w-full mx-auto even:lg:flex-row-reverse lg:flex-row"
               >
                 <div className="space-y-2">
-                  <div className="prose prose-h2:mt-0 prose-h2:text-3xl">
+                  <div className="prose-sm md:prose prose-h2:mt-0 prose-h2:text-2xl prose-h2:font-semibold md:prose-h2:text-3xl">
                     <DocumentRenderer document={await item.content()} />
                   </div>
                   <Link

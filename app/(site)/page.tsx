@@ -32,7 +32,7 @@ export default async function Home() {
         className="flex flex-col lg:flex-row items-start gap-12 lg:justify-between max-w-lg lg:max-w-full mx-auto"
       >
         <div className="max-w-lg">
-          <div className="prose">
+          <div className="prose-sm md:prose">
             <DocumentRenderer document={await homepage.heroText()} />
           </div>
           <div className="space-x-2">
@@ -58,7 +58,7 @@ export default async function Home() {
 
       <section id="features" className="flex flex-col items-center gap-8">
         <div className="max-w-xl text-center">
-          <div className="prose prose-h2:my-2 prose-h2:text-base prose-h2:text-primary prose-h3:text-3xl prose-h3:my-2">
+          <div className="prose-sm md:prose prose-h3:text-2xl prose-h2:my-2 prose-h2:text-base prose-h2:text-primary md:prose-h3:text-3xl prose-h3:font-semibold prose-h2:font-semibold prose-h3:my-2">
             <DocumentRenderer document={await homepage.featureText()} />
           </div>
         </div>
@@ -66,7 +66,7 @@ export default async function Home() {
           <ul className="flex flex-col md:flex-row gap-12">
             {homepage.features?.map((feature) => (
               <li key={feature.title} className="flex gap-4">
-                <div className="p-2 self-start bg-primary text-primary-foreground rounded-lg">
+                <div className="p-2 self-start bg-primary text-primary-foreground rounded-sm">
                   <Icon name={feature.icon} className="w-5 h-5" />
                 </div>
                 <div className="flex flex-col justify-between gap-4">
@@ -94,7 +94,7 @@ export default async function Home() {
       >
         <div className="relative w-full h-[300px] lg:h-[400px] lg:w-[400px]">
           <div className="absolute inset-0 w-full h-full bg-gradient-to-tr from-black/100 from-5% via-80% via-primary/80 to-primary/40 rounded-lg">
-            <div className="prose prose-p:text-primary-foreground prose-strong:text-primary-foreground prose-h4:text-primary-foreground prose-h4:text-2xl absolute bottom-0 p-4 prose-h4:font-bold">
+            <div className="prose-sm prose-p:text-primary-foreground prose-strong:text-primary-foreground prose-h4:text-primary-foreground prose-h4:text-2xl absolute bottom-0 p-4 prose-h4:font-bold">
               <DocumentRenderer document={await homepage.contentImageText()} />
             </div>
           </div>
@@ -107,7 +107,7 @@ export default async function Home() {
           />
         </div>
         <div className="max-w-lg">
-          <div className="prose prose-h2:my-2 prose-h2: prose-h2:text-base prose-h2:text-primary prose-h3:text-3xl prose-h3:my-2 prose-p:my-0 prose-p:py-3">
+          <div className="prose-sm md:prose prose-h2:my-2 prose-h2: prose-h2:text-base prose-h2:text-primary prose-h3:text-2xl md:prose-h3:text-3xl prose-h3:my-2 prose-p:my-0 prose-p:py-3 prose-h2:font-semibold">
             <DocumentRenderer document={await homepage.contentText()} />
           </div>
           <Link

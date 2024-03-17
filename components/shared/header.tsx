@@ -160,7 +160,7 @@ export function Header(props: HeaderProps) {
         </SheetContent>
       </Sheet>
 
-      <Button asChild variant="ghost" className="hidden lg:flex">
+      <Button asChild variant="ghost" size="default" className="hidden lg:flex">
         <Link href="/contact">
           Contact <ArrowRightIcon className="ml-2 w-4 h-4" />
         </Link>

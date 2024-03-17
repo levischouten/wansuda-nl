@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils";
 import { Metadata } from "next";
 
 const fontSans = FontSans({
-  weight: ["100", "300", "400", "700", "900"],
+  weight: ["100", "300", "400", "500", "600", "700", "900"],
   subsets: ["latin"],
   variable: "--font-sans",
 });
@@ -25,7 +25,7 @@ export default function RootLayout({
       <head />
       <body
         className={cn(
-          "min-h-screen bg-background font-sans antialiased",
+          "min-h-screen bg-background font-sans antialiased text-sm md:text-base",
           fontSans.variable
         )}
       >
