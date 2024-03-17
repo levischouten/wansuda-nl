@@ -9,9 +9,9 @@ items:
         werking op lichaam en geest
     image: /site/images/behandelingen/items/0/image.jpg
   - title:
-      name: De ontspanningsmassage
-      slug: de-ontspanningsmassage
-    description: |2-
-       Deze massage geeft een gevoel van rust en heeft daarbij ook een helende
-        werking op lichaam en geest
+      name: De sportmassage
+      slug: de-sportmassage
+    description: >-
+      Deze massage helpt met de genezing van sport blessures en verzuurde
+      spieren.
     image: /site/images/behandelingen/items/1/image.jpg
