@@ -4,7 +4,7 @@ heroCta:
   href: /behandelingen
 heroSecondaryCta:
   title: Wat we doen
-  href: "#about"
+  href: '#about'
 features:
   - title: Massage Meesterschap
     description: >-
