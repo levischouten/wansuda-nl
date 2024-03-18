@@ -30,7 +30,7 @@ jobs:
         if: env.RECENT_COMMITS == 'true'
         run: |
           echo ${{ env.YOUR_PROJECT_ID }}
-          curl -X POST "https://api.vercel.com/v1/integrations/deploy/prj_${{ env.YOUR_PROJECT_ID }}/${{ env.YOUR_VERCEL_TOKEN }}"
+          curl -X POST "https://api.vercel.com/v1/integrations/deploy/${{ env.YOUR_PROJECT_ID }}/${{ env.YOUR_VERCEL_TOKEN }}"
         env:
           YOUR_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
           YOUR_VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
