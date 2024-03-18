@@ -10,11 +10,8 @@ export NETLIFY_AUTH_TOKEN="${NETLIFY_AUTH_TOKEN}"
 GITHUB_TOKEN="${GITHUB_TOKEN}"
 GITHUB_REPO="levischouten/wansuda-nl"
 
-# Get the last successful deployment time from Netlify
-last_deploy_time=$(netlify deploy:list --site $NETLIFY_SITE_ID --json | jq -r '.[0].created_at')
-
-# Convert to timestamp
-last_deploy_timestamp=$(date -d "$last_deploy_time" +%s)
+# Get the current timestamp
+current_timestamp=$(date +%s)
 
 # Get the last commit time on the main branch from GitHub
 last_commit_time=$(curl -s -H "Authorization: token $GITHUB_TOKEN" "https://api.github.com/repos/$GITHUB_REPO/commits/main" | jq -r '.commit.committer.date')
@@ -22,10 +19,13 @@ last_commit_time=$(curl -s -H "Authorization: token $GITHUB_TOKEN" "https://api.
 # Convert to timestamp
 last_commit_timestamp=$(date -d "$last_commit_time" +%s)
 
-# Compare the timestamps and deploy if there are new commits
-if [ "$last_commit_timestamp" -gt "$last_deploy_timestamp" ]; then
-  echo "New commits found. Starting Netlify deployment."
-  netlify deploy --prod
+# Calculate the difference in hours
+diff_hours=$(( (current_timestamp - last_commit_timestamp) / 3600 ))
+
+# Check if there have been commits in the last 24 hours and deploy if true
+if [ "$diff_hours" -le 24 ]; then
+  echo "New commits found in the last 24 hours. Starting Netlify deployment."
+  netlify deploy --site $NETLIFY_SITE_ID --build
 else
-  echo "No new commits since the last deployment."
+  echo "No new commits in the last 24 hours."
 fi
