@@ -5,7 +5,7 @@ export default config({
     kind: process.env.NODE_ENV === "development" ? "local" : "cloud",
   },
   cloud: {
-    project: "levi-schouten/wansuda-nl",
+    project: "wansuda/wansuda-nl",
   },
   ui: {
     brand: {
