@@ -1,0 +1,29 @@
+name: Check and Deploy to Netlify
+
+on:
+  schedule:
+    - cron: "0 0 * * *" # Runs at midnight every day, customize as needed
+  workflow_dispatch: # This line enables manual triggering of the workflow
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: "14"
+
+      - name: Install Netlify CLI and jq
+        run: |
+          npm install netlify-cli -g
+          sudo apt-get install jq
+
+      - name: Deploy to Netlify if there are new commits
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: bash ./deploy_to_netlify.sh
