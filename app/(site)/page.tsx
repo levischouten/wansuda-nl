@@ -80,8 +80,12 @@ export default async function Home() {
                 </div>
                 <div className="flex flex-col justify-between gap-4">
                   <div className="space-y-4">
-                    <p className="font-bold">{feature.title}</p>
-                    <p className="prose">{feature.description}</p>
+                    <p className="text-base font-bold md:text-lg">
+                      {feature.title}
+                    </p>
+                    <p className="text-muted-foreground">
+                      {feature.description}
+                    </p>
                   </div>
                   <Link
                     href={feature.href}
