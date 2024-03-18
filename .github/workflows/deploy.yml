@@ -1,29 +1,35 @@
-name: Check and Deploy to Netlify
+name: Check and Deploy to Vercel
 
 on:
   schedule:
-    - cron: "0 0 * * *" # Runs at midnight every day, customize as needed
+    # Runs at 12:00 AM UTC every day
+    - cron: "0 0 * * *"
   workflow_dispatch: # This line enables manual triggering of the workflow
 
 jobs:
-  deploy:
+  check-and-deploy:
     runs-on: ubuntu-latest
     steps:
+      # Step 1: Check for commits in the last 24 hours
       - name: Checkout repository
         uses: actions/checkout@v2
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v2
         with:
-          node-version: "16"
+          fetch-depth: 0 # Fetches all history for all tags and branches
 
-      - name: Install Netlify CLI and jq
+      - name: Check for recent commits
+        id: check-commits
         run: |
-          npm install netlify-cli -g
-          sudo apt-get install jq
+          if git log --since='24 hours ago' > /dev/null; then
+            echo "RECENT_COMMITS=true" >> $GITHUB_ENV
+          else
+            echo "RECENT_COMMITS=false" >> $GITHUB_ENV
+          fi
 
-      - name: Deploy to Netlify if there are new commits
+      # Step 2: Trigger deployment on Vercel if there were recent commits
+      - name: Deploy to Vercel
+        if: env.RECENT_COMMITS == 'true'
+        run: |
+          curl -X POST "https://api.vercel.com/v1/integrations/deploy/prj_$YOUR_PROJECT_ID/$YOUR_VERCEL_TOKEN"
         env:
-          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: bash ./deploy_to_netlify.sh
+          YOUR_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+          YOUR_VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
