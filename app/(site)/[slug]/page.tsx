@@ -53,7 +53,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
   if (content) {
     return (
       <main className="mx-auto max-w-screen-lg space-y-20 px-8 pt-16 lg:space-y-40 lg:pt-40">
-        <section className="">
+        <section>
           <div className="prose prose-sm mx-auto md:prose md:prose-base">
             <DocumentRenderer document={await content.content()} />
           </div>
@@ -77,7 +77,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
               <section
                 key={item.title.slug}
                 id={item.title.slug}
-                className="mx-auto flex max-w-screen-sm flex-col items-center gap-16 lg:max-w-full lg:flex-row lg:items-start even:lg:flex-row-reverse"
+                className="mx-auto flex max-w-screen-sm flex-col items-center gap-16 py-8 lg:max-w-full lg:flex-row lg:items-start even:lg:flex-row-reverse"
               >
                 <div className="space-y-2">
                   <div className="prose prose-sm md:prose md:prose-base prose-h2:mt-0 prose-h2:text-2xl md:prose-h2:text-3xl">

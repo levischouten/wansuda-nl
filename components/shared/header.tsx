@@ -69,11 +69,9 @@ export function Header(props: HeaderProps) {
             if ("items" in item) {
               return (
                 <NavigationMenuItem key={item.href}>
-                  <NavigationMenuTrigger>
-                    <Link href={item.href}>{item.label}</Link>
-                  </NavigationMenuTrigger>
+                  <NavigationMenuTrigger>{item.label}</NavigationMenuTrigger>
                   <NavigationMenuContent>
-                    <ul className="grid grid-cols-1 gap-3 p-6 md:w-[400px] md:grid-cols-2 lg:w-[500px]">
+                    <ul className="grid w-[400px] grid-cols-1 gap-3 p-6">
                       {item.items.map((nestedItem) => (
                         <ListItem
                           key={nestedItem.label}
@@ -88,6 +86,15 @@ export function Header(props: HeaderProps) {
                         </ListItem>
                       ))}
                     </ul>
+                    <div className="w-[400px] rounded-b-lg border-t p-8 font-medium hover:bg-accent active:bg-accent">
+                      <Link
+                        href={item.href}
+                        className="flex items-center gap-2 text-sm"
+                      >
+                        Bekijk alle {item.label}{" "}
+                        <ArrowRightIcon className="h-4 w-4" />
+                      </Link>
+                    </div>
                   </NavigationMenuContent>
                 </NavigationMenuItem>
               );
@@ -118,7 +125,7 @@ export function Header(props: HeaderProps) {
               <Logo />
             </SheetTitle>
           </SheetHeader>
-          <div className="flex h-full flex-col justify-between">
+          <div className="flex h-full flex-col justify-between font-medium">
             <ul className="space-y-2">
               {props.items.map((item) => {
                 if ("items" in item) {
@@ -131,7 +138,7 @@ export function Header(props: HeaderProps) {
                           <ChevronDownIcon className="h-4 w-4 group-data-[state=open]:hidden" />
                         </CollapsibleTrigger>
                         <CollapsibleContent className="py-3">
-                          <ul className="space-y-2">
+                          <ul className="space-y-2 font-normal">
                             {item.items.map((nestedItem) => (
                               <Link
                                 key={nestedItem.label}
@@ -151,6 +158,20 @@ export function Header(props: HeaderProps) {
                                 </a>
                               </Link>
                             ))}
+                            <Link
+                              key={item.label}
+                              href={item.href}
+                              legacyBehavior
+                              passHref
+                            >
+                              <a
+                                className="flex select-none items-center gap-2 space-y-1 rounded-md px-6 py-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+                                onClick={() => setOpen(false)}
+                              >
+                                Alle {item.label}{" "}
+                                <ArrowRightIcon className="h-4 w-4" />
+                              </a>
+                            </Link>
                           </ul>
                         </CollapsibleContent>
                       </Collapsible>

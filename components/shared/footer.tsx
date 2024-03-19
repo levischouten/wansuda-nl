@@ -27,8 +27,8 @@ export function Footer(props: FooterProps) {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="mx-auto flex max-w-screen-lg flex-col items-center gap-8 px-8 pb-20 pt-48 text-sm">
-      <ul className="flex w-full flex-col justify-start gap-8 md:flex-row md:justify-center md:gap-12">
+    <footer className="mx-auto mt-48 flex flex-col items-center gap-8 bg-accent px-8 py-20 text-sm">
+      <ul className="flex w-full max-w-screen-lg flex-col justify-start gap-8 md:flex-row md:justify-center md:gap-12">
         {props.items.map((item) => {
           if ("items" in item) {
             return (

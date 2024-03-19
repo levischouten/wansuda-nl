@@ -60,6 +60,6 @@
   }
 
   .hero {
-    height: calc(100vh - theme(spacing.12));
+    height: calc(theme("height.screen") - theme(spacing.56));
   }
 }

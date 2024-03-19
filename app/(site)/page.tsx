@@ -29,7 +29,7 @@ export default async function Home() {
     <main className="mx-auto max-w-screen-lg space-y-28 px-8 lg:space-y-40">
       <section
         id="hero"
-        className="lg:hero mx-auto box-border flex max-w-lg flex-col items-start gap-12 pt-16 lg:max-w-full lg:flex-row lg:justify-between lg:pt-40"
+        className="hero tall:h-auto tall:mt-32 tall:mb-24 mx-auto box-border flex max-w-lg flex-col items-start gap-12 py-8 lg:mt-32 lg:max-w-full lg:flex-row lg:justify-between"
         hidden
       >
         <div className="max-w-lg space-y-8">
@@ -64,7 +64,7 @@ export default async function Home() {
 
       <section
         id="features"
-        className="mt-28 flex flex-col items-center gap-8 lg:mt-0"
+        className="mt-28 flex flex-col items-center gap-8 py-8 lg:mt-0"
       >
         <div className="max-w-xl text-center">
           <div className="prose prose-sm md:prose-base prose-h2:my-2 prose-h2:text-base prose-h2:text-primary prose-h3:my-2 prose-h3:text-2xl md:prose-h3:text-3xl">
@@ -103,7 +103,7 @@ export default async function Home() {
 
       <section
         id="about"
-        className="mx-auto flex max-w-xl flex-col items-start justify-between gap-20 lg:mx-0 lg:max-w-none lg:flex-row"
+        className="mx-auto flex max-w-xl flex-col items-start justify-between gap-20 py-8 lg:mx-0 lg:max-w-none lg:flex-row"
       >
         <div className="relative h-[300px] w-full lg:h-[400px] lg:w-[400px]">
           <div className="absolute inset-0 h-full w-full rounded-lg bg-gradient-to-tr from-black/100 from-5% via-primary/80 via-80% to-primary/40">
