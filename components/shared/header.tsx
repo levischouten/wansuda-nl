@@ -29,11 +29,8 @@ import {
   ChevronUpIcon,
   MailIcon,
   MenuIcon,
-  PhoneIcon,
-  PhoneOutgoingIcon,
 } from "lucide-react";
 import Link from "next/link";
-import Image from "next/image";
 import React from "react";
 import { Logo } from "./logo";
 
@@ -59,7 +56,7 @@ export function Header(props: HeaderProps) {
   const [open, setOpen] = React.useState(false);
 
   return (
-    <header className="mx-auto flex max-w-screen-lg items-center justify-between px-8 py-4">
+    <header className="sticky inset-0 z-50 mx-auto mb-8 flex max-w-screen-lg items-center justify-between border-b bg-background px-8 py-4 lg:relative lg:mb-0 lg:border-none">
       <Link href="/">
         <Logo />
       </Link>

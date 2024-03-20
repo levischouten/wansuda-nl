@@ -1,6 +1,6 @@
+import { Document } from "@/components/shared/document";
 import keystaticConfig from "@/keystatic.config";
 import { createReader } from "@keystatic/core/reader";
-import { DocumentRenderer } from "@keystatic/core/renderer";
 import { ArrowRightIcon } from "lucide-react";
 import { ResolvingMetadata } from "next";
 import Image from "next/image";
@@ -52,11 +52,9 @@ export default async function Page({ params }: { params: { slug: string } }) {
 
   if (content) {
     return (
-      <main className="mx-auto max-w-screen-lg space-y-20 px-8 pt-16 lg:space-y-40 lg:pt-40">
+      <main className="mx-auto max-w-screen-lg space-y-20 px-8 pt-8 lg:space-y-40 lg:pt-40">
         <section>
-          <div className="prose prose-sm mx-auto md:prose md:prose-base">
-            <DocumentRenderer document={await content.content()} />
-          </div>
+          <Document document={await content.content()} className="mx-auto" />
         </section>
       </main>
     );
@@ -64,25 +62,27 @@ export default async function Page({ params }: { params: { slug: string } }) {
 
   if (features) {
     return (
-      <main className="mx-auto max-w-screen-lg space-y-20 px-8 pt-16 lg:space-y-40 lg:pt-40">
+      <main className="mx-auto max-w-screen-lg space-y-20 px-8 pt-8 lg:space-y-40 lg:pt-40">
         <section className="flex justify-center">
-          <div className="prose prose-sm text-center md:prose md:prose-base">
-            <DocumentRenderer document={await features.header()} />
-          </div>
+          <Document
+            document={await features.header()}
+            className="text-center"
+          />
         </section>
 
-        <div className="space-y-28">
+        <div className="space-y-12 lg:space-y-28">
           {await Promise.all(
             features.items.map(async (item) => (
               <section
                 key={item.title.slug}
                 id={item.title.slug}
-                className="mx-auto flex max-w-screen-sm flex-col items-center gap-16 py-8 lg:max-w-full lg:flex-row lg:items-start even:lg:flex-row-reverse"
+                className="mx-auto flex max-w-screen-sm flex-col items-center gap-16 py-8 pt-24 lg:max-w-full lg:flex-row lg:items-start lg:pt-8 even:lg:flex-row-reverse"
               >
                 <div className="space-y-2">
-                  <div className="prose prose-sm md:prose md:prose-base prose-h2:mt-0 prose-h2:text-2xl md:prose-h2:text-3xl">
-                    <DocumentRenderer document={await item.content()} />
-                  </div>
+                  <Document
+                    document={await item.content()}
+                    className="prose-h2:mt-0 prose-h2:text-2xl md:prose-h2:text-3xl"
+                  />
                   <Link
                     href="/contact"
                     className="flex items-center gap-2 font-semibold text-primary"

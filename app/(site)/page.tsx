@@ -1,8 +1,8 @@
+import { Document } from "@/components/shared/document";
 import { Button } from "@/components/ui/button";
 import Icon from "@/components/ui/icon";
 import keystaticConfig from "@/keystatic.config";
 import { createReader } from "@keystatic/core/reader";
-import { DocumentRenderer } from "@keystatic/core/renderer";
 import { ArrowRightIcon } from "lucide-react";
 import { ResolvingMetadata } from "next";
 import Image from "next/image";
@@ -29,13 +29,11 @@ export default async function Home() {
     <main className="mx-auto max-w-screen-lg space-y-28 px-8 lg:space-y-40">
       <section
         id="hero"
-        className="hero tall:h-auto tall:mt-32 tall:mb-24 mx-auto box-border flex max-w-lg flex-col items-start gap-12 py-8 lg:mt-32 lg:max-w-full lg:flex-row lg:justify-between"
+        className="lg:hero h-lg:h-auto h-lg:mb-24 mx-auto mb-24 flex max-w-lg flex-col items-start gap-12 py-8 lg:mb-0 lg:mt-32 lg:max-w-full lg:flex-row lg:justify-between"
         hidden
       >
         <div className="max-w-lg space-y-8">
-          <div className="prose prose-sm md:prose-base">
-            <DocumentRenderer document={await homepage.heroText()} />
-          </div>
+          <Document document={await homepage.heroText()} />
           <div className="space-x-2">
             <Button asChild size="lg">
               <Link href={homepage.heroCta.href}>{homepage.heroCta.title}</Link>
@@ -62,14 +60,12 @@ export default async function Home() {
         />
       </section>
 
-      <section
-        id="features"
-        className="mt-28 flex flex-col items-center gap-8 py-8 lg:mt-0"
-      >
+      <section id="features" className="flex flex-col items-center gap-8 py-8">
         <div className="max-w-xl text-center">
-          <div className="prose prose-sm md:prose-base prose-h2:my-2 prose-h2:text-base prose-h2:text-primary prose-h3:my-2 prose-h3:text-2xl md:prose-h3:text-3xl">
-            <DocumentRenderer document={await homepage.featureText()} />
-          </div>
+          <Document
+            document={await homepage.heroText()}
+            className="prose-h2:my-2 prose-h2:text-base prose-h2:text-primary prose-h3:my-2 prose-h3:text-2xl md:prose-h3:text-3xl"
+          />
         </div>
         <div className="max-w-3xl">
           <ul className="flex flex-col gap-12 md:flex-row">
@@ -107,9 +103,10 @@ export default async function Home() {
       >
         <div className="relative h-[300px] w-full lg:h-[400px] lg:w-[400px]">
           <div className="absolute inset-0 h-full w-full rounded-lg bg-gradient-to-tr from-black/100 from-5% via-primary/80 via-80% to-primary/40">
-            <div className="prose prose-sm absolute bottom-0 p-4 md:prose-base prose-h4:text-2xl prose-h4:font-bold prose-h4:text-primary-foreground prose-p:text-primary-foreground prose-strong:text-primary-foreground">
-              <DocumentRenderer document={await homepage.contentImageText()} />
-            </div>
+            <Document
+              document={await homepage.contentImageText()}
+              className="absolute bottom-0 p-4 md:prose-base prose-h4:text-2xl prose-h4:font-bold prose-h4:text-primary-foreground prose-p:text-primary-foreground prose-strong:text-primary-foreground"
+            />
           </div>
           <Image
             src={homepage.contentImage!}
@@ -120,9 +117,10 @@ export default async function Home() {
           />
         </div>
         <div className="max-w-lg">
-          <div className="prose-h2: prose prose-sm md:prose prose-h2:my-2 prose-h2:text-base prose-h2:text-primary prose-h3:my-2 prose-h3:text-2xl prose-p:my-0 prose-p:py-3 md:prose-h3:text-3xl">
-            <DocumentRenderer document={await homepage.contentText()} />
-          </div>
+          <Document
+            document={await homepage.contentText()}
+            className="prose-h2:my-2 prose-h2:text-base prose-h2:text-primary prose-h3:my-2 prose-h3:text-2xl prose-p:my-0 prose-p:py-3 md:prose-h3:text-3xl"
+          />
           <Link
             href={homepage.contentCta.href}
             className="flex items-center gap-2 font-semibold text-primary"
