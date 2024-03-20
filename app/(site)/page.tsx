@@ -29,7 +29,7 @@ export default async function Home() {
     <main className="mx-auto max-w-screen-lg space-y-28 px-8 lg:space-y-40">
       <section
         id="hero"
-        className="lg:hero h-lg:h-auto h-lg:mb-24 mx-auto mb-24 flex max-w-lg flex-col items-start gap-12 py-8 lg:mb-0 lg:mt-32 lg:max-w-full lg:flex-row lg:justify-between"
+        className="lg:hero mx-auto mb-24 flex max-w-lg flex-col items-start gap-12 py-8 lg:mb-0 lg:mt-32 lg:max-w-full lg:flex-row lg:justify-between h-lg:mb-24 h-lg:h-auto"
         hidden
       >
         <div className="max-w-lg space-y-8">
@@ -56,7 +56,7 @@ export default async function Home() {
           alt="hero image"
           width={400}
           height={400}
-          className="aspect-square h-[400px] w-[400px] rounded-lg object-cover"
+          className="aspect-square rounded-lg object-cover"
         />
       </section>
 

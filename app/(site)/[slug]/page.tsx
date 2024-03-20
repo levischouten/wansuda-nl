@@ -62,7 +62,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
 
   if (features) {
     return (
-      <main className="mx-auto max-w-screen-lg space-y-20 px-8 pt-8 lg:space-y-40 lg:pt-40">
+      <main className="mx-auto max-w-screen-lg px-8 pt-8 lg:space-y-40 lg:pt-40">
         <section className="flex justify-center">
           <Document
             document={await features.header()}
@@ -70,7 +70,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
           />
         </section>
 
-        <div className="space-y-12 lg:space-y-28">
+        <div className="lg:space-y-28">
           {await Promise.all(
             features.items.map(async (item) => (
               <section
@@ -95,7 +95,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
                   width={400}
                   height={400}
                   alt="Course image"
-                  className="aspect-square max-h-[400px] w-full rounded-lg object-cover lg:w-[400px]"
+                  className="aspect-square rounded-lg object-cover"
                 />
               </section>
             )),

@@ -6,6 +6,7 @@ import {
   CollapsibleContent,
   CollapsibleTrigger,
 } from "@/components/ui/collapsible";
+import { usePathname } from "next/navigation";
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -54,6 +55,11 @@ type HeaderProps = {
 
 export function Header(props: HeaderProps) {
   const [open, setOpen] = React.useState(false);
+  const pathname = usePathname();
+
+  const active = pathname.replace("/", "");
+
+  console.log(active);
 
   return (
     <header className="sticky inset-0 z-50 mx-auto mb-8 flex max-w-screen-lg items-center justify-between border-b bg-background px-8 py-4 lg:relative lg:mb-0 lg:border-none">
@@ -99,8 +105,16 @@ export function Header(props: HeaderProps) {
 
             return (
               <NavigationMenuItem key={item.label}>
-                <Link href={item.href} legacyBehavior passHref>
-                  <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                <Link href={item.href || "/"} legacyBehavior passHref>
+                  <NavigationMenuLink
+                    className={cn(
+                      navigationMenuTriggerStyle(),
+                      "hover:bg-accent focus:bg-background focus:text-primary",
+                      {
+                        "text-primary": active === item.href,
+                      },
+                    )}
+                  >
                     {item.label}
                   </NavigationMenuLink>
                 </Link>
@@ -112,7 +126,7 @@ export function Header(props: HeaderProps) {
 
       <Sheet open={open} onOpenChange={setOpen}>
         <Button asChild variant="ghost" size="icon" className="lg:hidden">
-          <SheetTrigger>
+          <SheetTrigger aria-label="Toggle navigation menu">
             <MenuIcon className="h-5 w-5" />
           </SheetTrigger>
         </Button>
@@ -128,7 +142,10 @@ export function Header(props: HeaderProps) {
                 if ("items" in item) {
                   return (
                     <li key={item.label}>
-                      <Collapsible className="group">
+                      <Collapsible
+                        className="group"
+                        defaultOpen={item.href === active}
+                      >
                         <CollapsibleTrigger className="flex w-full select-none items-center justify-between rounded-md p-3 text-start leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground">
                           {item.label}
                           <ChevronUpIcon className="h-4 w-4 group-data-[state=closed]:hidden" />

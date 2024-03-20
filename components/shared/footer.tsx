@@ -64,12 +64,20 @@ export function Footer(props: FooterProps) {
       </ul>
       <div className="flex gap-2 text-muted-foreground">
         <Button size="icon" variant="ghost" asChild>
-          <Link href={props.settings.facebook} target="_blank">
+          <Link
+            href={props.settings.facebook}
+            target="_blank"
+            aria-label="Link to facebook"
+          >
             <FacebookIcon className="h-4 w-4" />
           </Link>
         </Button>
         <Button size="icon" variant="ghost" asChild>
-          <Link href={`mailto:${props.settings.email}`} target="_blank">
+          <Link
+            href={`mailto:${props.settings.email}`}
+            target="_blank"
+            aria-label="Link to mail"
+          >
             <MailIcon className="h-4 w-4" />
           </Link>
         </Button>

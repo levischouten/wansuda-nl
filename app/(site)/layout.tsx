@@ -19,7 +19,7 @@ export default async function RootLayout({
   const items = [
     {
       label: "Welkom",
-      href: "/",
+      href: "",
     },
     ...features.map((feature) => ({
       label: feature.entry.title || "",
