@@ -82,9 +82,10 @@ export function Footer(props: FooterProps) {
           </Link>
         </Button>
       </div>
-      <p className="text-xs text-muted-foreground">
-        © {year} Wansuda. Alle rechten voorbehouden.
-      </p>
+      <div className="text-center text-xs text-muted-foreground">
+        <p>Wim Meuldijklaan 55 1336 CK Almere</p>
+        <p>© {year} Wansuda. Alle rechten voorbehouden.</p>
+      </div>
     </footer>
   );
 }

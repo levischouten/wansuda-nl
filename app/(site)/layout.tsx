@@ -19,20 +19,20 @@ export default async function RootLayout({
   const items = [
     {
       label: "Welkom",
-      href: "",
+      href: "/",
     },
     ...features.map((feature) => ({
       label: feature.entry.title || "",
-      href: feature.slug,
+      href: `/${feature.slug}`,
       items: feature.entry.items.map((item) => ({
         label: item.title.name,
         description: item.description,
-        href: item.title.slug,
+        href: `/${feature.slug}#${item.title.slug}`,
       })),
     })),
     ...content.map((entry) => ({
       label: entry.entry.title || "",
-      href: entry.slug,
+      href: `/${entry.slug}`,
     })),
   ];
 

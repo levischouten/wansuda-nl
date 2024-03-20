@@ -57,8 +57,6 @@ export function Header(props: HeaderProps) {
   const [open, setOpen] = React.useState(false);
   const pathname = usePathname();
 
-  const active = pathname.replace("/", "");
-
   return (
     <header className="sticky inset-0 z-50 mx-auto mb-8 flex max-w-screen-lg items-center justify-between border-b bg-background px-8 py-4 lg:relative lg:mb-0 lg:border-none">
       <Link href="/">
@@ -74,7 +72,7 @@ export function Header(props: HeaderProps) {
                     className={cn(
                       "hover:bg-background focus:bg-background focus:outline-primary",
                       {
-                        "font-semibold text-primary": active === item.href,
+                        "font-semibold text-primary": pathname === item.href,
                       },
                     )}
                   >
@@ -86,11 +84,7 @@ export function Header(props: HeaderProps) {
                         <ListItem
                           key={nestedItem.label}
                           title={nestedItem.label}
-                          href={
-                            nestedItem.href
-                              ? `/${item.href}#${nestedItem.href}`
-                              : `/${item.href}`
-                          }
+                          href={nestedItem.href}
                         >
                           {nestedItem.description}
                         </ListItem>
@@ -111,9 +105,9 @@ export function Header(props: HeaderProps) {
 
             return (
               <NavigationMenuItem key={item.label}>
-                <Link href={item.href || "/"} legacyBehavior passHref>
+                <Link href={item.href} legacyBehavior passHref>
                   <NavigationMenuLink
-                    active={active === item.href}
+                    active={pathname === item.href}
                     className={cn(navigationMenuTriggerStyle())}
                   >
                     {item.label}
@@ -131,13 +125,18 @@ export function Header(props: HeaderProps) {
             <MenuIcon className="h-5 w-5" />
           </SheetTrigger>
         </Button>
-        <SheetContent className="flex w-full max-w-full flex-col space-y-4 sm:w-[500px]">
+        <SheetContent
+          className="flex w-full max-w-full flex-col space-y-4 overflow-auto sm:w-[500px]"
+          onOpenAutoFocus={(event) => {
+            event.preventDefault();
+          }}
+        >
           <SheetHeader className="p-3">
             <SheetTitle>
               <Logo />
             </SheetTitle>
           </SheetHeader>
-          <div className="flex h-full flex-col justify-between font-medium">
+          <div className="flex h-full flex-col justify-between gap-8 font-medium">
             <ul className="space-y-2">
               {props.items.map((item) => {
                 if ("items" in item) {
@@ -145,13 +144,13 @@ export function Header(props: HeaderProps) {
                     <li key={item.label}>
                       <Collapsible
                         className="group"
-                        defaultOpen={item.href === active}
+                        defaultOpen={item.href === pathname}
                       >
                         <CollapsibleTrigger
                           className={cn(
                             "flex w-full select-none items-center justify-between rounded-md p-3 text-start leading-none no-underline outline-none transition-colors hover:text-primary focus:outline-primary",
                             {
-                              "text-primary": item.href === active,
+                              "font-semibold": item.href === pathname,
                             },
                           )}
                         >
@@ -164,11 +163,7 @@ export function Header(props: HeaderProps) {
                             {item.items.map((nestedItem) => (
                               <Link
                                 key={nestedItem.label}
-                                href={
-                                  nestedItem.href
-                                    ? `/${item.href}#${nestedItem.href}`
-                                    : `/${item.href}`
-                                }
+                                href={nestedItem.href}
                                 legacyBehavior
                                 passHref
                               >
@@ -207,7 +202,7 @@ export function Header(props: HeaderProps) {
                         className={cn(
                           "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:text-primary focus:outline-primary",
                           {
-                            "text-primary": item.href === active,
+                            "font-semibold": item.href === pathname,
                           },
                         )}
                         onClick={() => setOpen(false)}

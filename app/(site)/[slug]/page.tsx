@@ -76,7 +76,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
               <section
                 key={item.title.slug}
                 id={item.title.slug}
-                className="mx-auto flex max-w-screen-sm flex-col items-center gap-16 py-8 pt-24 lg:max-w-full lg:flex-row lg:items-start lg:pt-8 even:lg:flex-row-reverse"
+                className="mx-auto flex max-w-screen-sm flex-col items-center gap-8 py-8 pt-24 lg:max-w-full lg:flex-row lg:items-start lg:gap-16 lg:pt-8 even:lg:flex-row-reverse"
               >
                 <div className="space-y-2">
                   <Document
