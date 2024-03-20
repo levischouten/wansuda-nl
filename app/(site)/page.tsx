@@ -124,7 +124,7 @@ export default async function Home() {
             href={homepage.contentCta.href}
             className="flex items-center gap-2 font-semibold text-primary underline-offset-2 hover:underline"
           >
-            {homepage.contentCta.title}→
+            {homepage.contentCta.title} →
           </Link>
         </div>
       </section>
