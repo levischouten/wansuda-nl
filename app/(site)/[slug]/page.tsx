@@ -85,9 +85,9 @@ export default async function Page({ params }: { params: { slug: string } }) {
                   />
                   <Link
                     href="/contact"
-                    className="flex items-center gap-2 font-semibold text-primary"
+                    className="flex items-center gap-2 font-semibold text-primary underline-offset-2 hover:underline"
                   >
-                    Boek nu <ArrowRightIcon className="h-4 w-4" />
+                    Boek nu →
                   </Link>
                 </div>
                 <Image

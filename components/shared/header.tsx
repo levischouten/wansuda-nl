@@ -59,8 +59,6 @@ export function Header(props: HeaderProps) {
 
   const active = pathname.replace("/", "");
 
-  console.log(active);
-
   return (
     <header className="sticky inset-0 z-50 mx-auto mb-8 flex max-w-screen-lg items-center justify-between border-b bg-background px-8 py-4 lg:relative lg:mb-0 lg:border-none">
       <Link href="/">
@@ -72,7 +70,16 @@ export function Header(props: HeaderProps) {
             if ("items" in item) {
               return (
                 <NavigationMenuItem key={item.href}>
-                  <NavigationMenuTrigger>{item.label}</NavigationMenuTrigger>
+                  <NavigationMenuTrigger
+                    className={cn(
+                      "hover:bg-background focus:bg-background focus:outline-primary",
+                      {
+                        "font-semibold text-primary": active === item.href,
+                      },
+                    )}
+                  >
+                    {item.label}
+                  </NavigationMenuTrigger>
                   <NavigationMenuContent>
                     <ul className="grid w-[400px] grid-cols-1 gap-3 p-6">
                       {item.items.map((nestedItem) => (
@@ -89,13 +96,12 @@ export function Header(props: HeaderProps) {
                         </ListItem>
                       ))}
                     </ul>
-                    <div className="w-[400px] rounded-b-lg border-t p-8 font-medium hover:bg-accent active:bg-accent">
+                    <div className="w-[400px] rounded-b-lg border-t font-medium hover:bg-accent active:bg-accent">
                       <Link
                         href={item.href}
-                        className="flex items-center gap-2 text-sm"
+                        className="flex items-center gap-2 p-8 text-sm hover:outline-none"
                       >
-                        Bekijk alle {item.label}{" "}
-                        <ArrowRightIcon className="h-4 w-4" />
+                        Bekijk alle {item.label} →
                       </Link>
                     </div>
                   </NavigationMenuContent>
@@ -107,13 +113,8 @@ export function Header(props: HeaderProps) {
               <NavigationMenuItem key={item.label}>
                 <Link href={item.href || "/"} legacyBehavior passHref>
                   <NavigationMenuLink
-                    className={cn(
-                      navigationMenuTriggerStyle(),
-                      "hover:bg-accent focus:bg-background focus:text-primary",
-                      {
-                        "text-primary": active === item.href,
-                      },
-                    )}
+                    active={active === item.href}
+                    className={cn(navigationMenuTriggerStyle())}
                   >
                     {item.label}
                   </NavigationMenuLink>
@@ -146,7 +147,14 @@ export function Header(props: HeaderProps) {
                         className="group"
                         defaultOpen={item.href === active}
                       >
-                        <CollapsibleTrigger className="flex w-full select-none items-center justify-between rounded-md p-3 text-start leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground">
+                        <CollapsibleTrigger
+                          className={cn(
+                            "flex w-full select-none items-center justify-between rounded-md p-3 text-start leading-none no-underline outline-none transition-colors hover:text-primary focus:outline-primary",
+                            {
+                              "text-primary": item.href === active,
+                            },
+                          )}
+                        >
                           {item.label}
                           <ChevronUpIcon className="h-4 w-4 group-data-[state=closed]:hidden" />
                           <ChevronDownIcon className="h-4 w-4 group-data-[state=open]:hidden" />
@@ -182,8 +190,7 @@ export function Header(props: HeaderProps) {
                                 className="flex select-none items-center gap-2 space-y-1 rounded-md px-6 py-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
                                 onClick={() => setOpen(false)}
                               >
-                                Alle {item.label}{" "}
-                                <ArrowRightIcon className="h-4 w-4" />
+                                Alle {item.label} →
                               </a>
                             </Link>
                           </ul>
@@ -197,7 +204,12 @@ export function Header(props: HeaderProps) {
                   <li key={item.href}>
                     <Link href={item.href} legacyBehavior passHref>
                       <a
-                        className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+                        className={cn(
+                          "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:text-primary focus:outline-primary",
+                          {
+                            "text-primary": item.href === active,
+                          },
+                        )}
                         onClick={() => setOpen(false)}
                       >
                         {item.label}

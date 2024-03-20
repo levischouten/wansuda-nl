@@ -85,10 +85,9 @@ export default async function Home() {
                   </div>
                   <Link
                     href={feature.href}
-                    className="flex items-center gap-2 font-semibold text-primary md:pt-4"
+                    className="flex items-center gap-2 font-semibold text-primary underline-offset-2 hover:underline md:pt-4"
                   >
-                    Lees meer
-                    <ArrowRightIcon className="h-4 w-4" />
+                    Lees meer →
                   </Link>
                 </div>
               </li>
@@ -123,10 +122,9 @@ export default async function Home() {
           />
           <Link
             href={homepage.contentCta.href}
-            className="flex items-center gap-2 font-semibold text-primary"
+            className="flex items-center gap-2 font-semibold text-primary underline-offset-2 hover:underline"
           >
-            {homepage.contentCta.title}
-            <ArrowRightIcon className="h-4 w-4" />
+            {homepage.contentCta.title}→
           </Link>
         </div>
       </section>
