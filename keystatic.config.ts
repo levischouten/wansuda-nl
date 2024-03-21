@@ -113,7 +113,7 @@ export default config({
           label: "Content Text",
           description: "The text to display as the 'content' text.",
           formatting: {
-            headingLevels: [2, 3],
+            headingLevels: [2, 3, 4],
             inlineMarks: true,
             listTypes: true,
           },

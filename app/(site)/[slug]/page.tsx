@@ -1,7 +1,6 @@
 import { Document } from "@/components/shared/document";
 import keystaticConfig from "@/keystatic.config";
 import { createReader } from "@keystatic/core/reader";
-import { ArrowRightIcon } from "lucide-react";
 import { ResolvingMetadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
